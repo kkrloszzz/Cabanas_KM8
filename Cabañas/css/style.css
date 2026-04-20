@@ -738,3 +738,39 @@ footer {
   cursor: pointer;
   min-height: 200px;
 }
+
+/* ── GALERÍA MÓVIL ── */
+@media (max-width: 768px) {
+  .gallery-container {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .gallery-arrow {
+    display: none;
+  }
+
+  .social-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 10px;
+    padding: 0 1.5rem 1rem;
+    background: transparent;
+    width: 100%;
+  }
+
+  .social-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .social-post {
+    flex: 0 0 75vw;
+    min-height: unset;
+    aspect-ratio: 4 / 3;
+    scroll-snap-align: center;
+    border-radius: 6px;
+  }
+}
