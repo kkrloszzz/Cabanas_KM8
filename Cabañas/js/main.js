@@ -113,8 +113,11 @@ function cambiarLightbox(dir) {
 
 // ── DOM LISTO ──
 document.addEventListener('DOMContentLoaded', function() {
+
+  // Personas
   actualizarPersonas();
 
+  // Patente
   document.getElementById('patente').addEventListener('keyup', function() {
     let raw = this.value.replace(/-/g, '').toUpperCase().replace(/[^A-Z0-9]/g, '');
     if (raw.length > 6) raw = raw.slice(0, 6);
@@ -126,4 +129,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     this.value = formatted;
   });
+
+  // Slider hero
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  let heroIndex = 0;
+
+  if (heroSlides.length > 0) {
+    setInterval(function() {
+      heroSlides[heroIndex].classList.remove('active');
+      heroIndex = (heroIndex + 1) % heroSlides.length;
+      heroSlides[heroIndex].classList.add('active');
+    }, 3000);
+  }
+
 });

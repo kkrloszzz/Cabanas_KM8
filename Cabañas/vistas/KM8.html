@@ -10,6 +10,7 @@
 </head>
 <body>
 
+  <!-- Navbar -->
 <nav>
   <a class="nav-logo" href="#">Cabañas <span>8 Km</span></a>
   <ul class="nav-links">
@@ -22,6 +23,7 @@
   <button class="nav-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Reservar Ahora</button>
 </nav>
 
+<!-- Home -->
 <section class="hero">
   <div class="hero-left">
     <img src="../assets/kabanas-removebg-preview.png" alt="Cabañas KM8" class="hero-logo fade-in">
@@ -34,12 +36,13 @@
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-img-container">
-      <div class="img-placeholder" style="height: 100%; width: 100%;">
-        <img src="../assets/cabanas.png" alt="cabanas_cura" class="hero-right">
-      </div>
-    </div>
+  <div class="hero-slider" id="hero-slider">
+    <img src="../assets/cabanas.png" alt="cabañas" class="hero-slide active">
+    <img src="../assets/cabana1.jpg" alt="cabaña 1" class="hero-slide">
+    <img src="../assets/interior.jpg" alt="interior" class="hero-slide">
+    <img src="../assets/tinaja.jpeg" alt="tinaja" class="hero-slide">
   </div>
+</div>
 </section>
 
 <div class="strip">
@@ -56,13 +59,12 @@
   <span class="strip-item">🏆 Superanfitriones en Airbnb</span>
 </div>
 
+
 <section class="section about" id="nosotros">
   <div class="about-grid">
     <div class="about-imgs">
-      <img src="../assets/cabana1.jpg" alt="Cabaña 1">
+      <img src="../assets/super_anfitrion.png" alt="super anfitrión" class="about-img about-img-top">
       <div class="about-img">
-        <span class="about-img-icon">🌊</span>
-        <span class="about-img-label">Imagen 3</span>
       </div>
     </div>
     <div class="about-text">
@@ -76,7 +78,7 @@
           <span class="stat-desc">Cabañas</span>
         </div>
         <div class="stat-box">
-          <span class="stat-num">+500</span>
+          <span class="stat-num">+50</span>
           <span class="stat-desc">Familias</span>
         </div>
         <div class="stat-box">
@@ -88,6 +90,7 @@
   </div>
 </section>
 
+<!-- Elegir Cabañas -->
 <section class="section cabanas" id="cabanas">
   <p class="section-label">Alojamientos</p>
   <h2 class="section-title" style="margin-bottom: 3rem;">Elige tu <em>cabaña</em></h2>
@@ -95,24 +98,22 @@
 
     <div class="cabana-card">
       <div class="cabana-img">
-        <span class="cabana-img-icon">🌲</span>
-        <span class="cabana-img-label">+ Añadir imagen</span>
+        <!-- Poner imagen -->
       </div>
       <div class="cabana-info">
         <p class="cabana-tag">1–4 personas · Pequeña</p>
         <h3 class="cabana-name">Cabaña Conguillio</h3>
-        <p class="cabana-desc">Frente al lago con terraza privada, chimenea y vista panorámica al volcán. Ideal para parejas o familias pequeñas.</p>
+        <p class="cabana-desc">Cabaña pequeña</p>
         <div class="cabana-footer">
           <div class="cabana-price">$80.000 <span>/ dia</span></div>
-          <button class="cabana-book">Reservar</button>
+          <button href="https://www.facebook.com/cabanas.km.curacautin" class="cabana-book">Reservar</button>
         </div>
       </div>
     </div>
 
     <div class="cabana-card">
       <div class="cabana-img">
-        <span class="cabana-img-icon">🏔️</span>
-        <span class="cabana-img-label">+ Añadir imagen</span>
+        <!-- Poner imagen -->
       </div>
       <div class="cabana-info">
         <p class="cabana-tag">4–6 personas · Mediana</p>
@@ -127,8 +128,7 @@
 
     <div class="cabana-card">
       <div class="cabana-img">
-        <span class="cabana-img-icon">🌊</span>
-        <span class="cabana-img-label">+ Añadir imagen</span>
+        <!-- Poner imagen -->
       </div>
       <div class="cabana-info">
         <p class="cabana-tag">2 personas · Familiar</p>
@@ -144,6 +144,7 @@
   </div>
 </section>
 
+<!-- Valoraciones del servicio -->
 <section class="section reviews" id="valoraciones">
   <p class="section-label">Valoraciones</p>
   <h2 class="section-title">Lo que dicen <em>nuestros</em> huéspedes</h2>
@@ -191,6 +192,7 @@
   </div>
 </section>
 
+<!-- Como llegar -->
 <section class="section location" id="ubicacion">
   <p class="section-label">Cómo llegar</p>
   <h2 class="section-title" style="margin-bottom: 3rem;">Nos encontramos en <em>Curacautín</em></h2>
@@ -212,22 +214,22 @@
         <div class="location-item">
           <div class="location-icon">🚌</div>
           <div class="location-item-text">
-            <strong>Bus Directo</strong>
-            <span>Salidas diarias desde Temuco y Valdivia</span>
+            <strong>Bus </strong>
+            <span>Salidas diarias desde Temuco, Lautaro y Victoria</span>
           </div>
         </div>
         <div class="location-item">
           <div class="location-icon">📍</div>
           <div class="location-item-text">
             <strong>Dirección</strong>
-            <span>Ruta 181, Curacautin, Curacautín, Araucanía</span>
+            <span>Ruta 181, Curacautín, Araucanía</span>
           </div>
         </div>
         <div class="location-item">
           <div class="location-icon">📞</div>
           <div class="location-item-text">
             <strong>Contacto directo</strong>
-            <span>+56 9 5207 5800 · hola@rincondelsur.cl</span>
+            <span>+56 9 5207 5800 · cabanas8km@gmail.com</span>
           </div>
         </div>
       </div>
@@ -235,6 +237,7 @@
   </div>
 </section>
 
+<!-- Fotos y Redes Sociales -->
 <section class="section social" id="redes">
   <p class="section-label">Redes sociales</p>
   <h2 class="section-title" style="margin-bottom: 3rem;">Vívelo antes de <em>llegar</em></h2>
@@ -260,7 +263,7 @@
     <button class="gallery-arrow gallery-arrow-right" onclick="moverGaleria(1)">&#8594;</button>
   </div>
 
-  <!-- Lightbox -->
+  
   <div class="lightbox" id="lightbox" onclick="cerrarLightbox()">
     <button class="lightbox-close" onclick="cerrarLightbox()">✕</button>
     <button class="lightbox-prev" onclick="event.stopPropagation(); cambiarLightbox(-1)">&#8592;</button>
@@ -280,21 +283,21 @@
   <div class="contact-grid">
     <div class="contact-info">
       <p class="section-label">Reservas</p>
-      <h3>Escríbenos y te<br><em style="font-family:'Playfair Display',serif;font-style:italic;">respondemos hoy</em></h3>
-      <p>Selecciona tus fechas, cuéntanos cuántos son y te enviamos disponibilidad y tarifas especiales. Atención personalizada de lunes a domingo.</p>
+      <h3>Escríbenos y te responderemos<br><em style="font-family:'Playfair Display',serif;font-style:italic;">Cuanto antes!</em></h3>
+      <p>Selecciona tus fechas, cuéntanos cuántos son, anota la patente de tu vehículo y te avisaremos si hay disponibilidad. Atención personalizada de lunes a viernes.</p>
       <div class="location-details">
         <div class="location-item">
           <div class="location-icon">⏰</div>
           <div class="location-item-text">
             <strong>Horario de atención</strong>
-            <span>Lunes a Domingo · 09:00 – 21:00 hrs</span>
+            <span>Lunes a Viernes · 09:00 – 21:00 hrs</span>
           </div>
         </div>
         <div class="location-item">
           <div class="location-icon">💳</div>
           <div class="location-item-text">
             <strong>Formas de pago</strong>
-            <span>Transferencia, tarjeta y Mercado Pago</span>
+            <span>Transferencia Y Efectivo</span>
           </div>
         </div>
       </div>
@@ -328,8 +331,8 @@
         <label>Cabaña de interés</label>
         <select>
           <option value="">Selecciona...</option>
-          <option>Cabaña 1 (2–4 personas)</option>
-          <option>Cabaña 2 (4–6 personas)</option>
+          <option>Cabaña Conguillio (2–4 personas)</option>
+          <option>Cabaña Malleco (4–6 personas)</option>
           <option>Cabaña 3 (2 personas · Premium)</option>
         </select>
       </div>
@@ -343,7 +346,7 @@
           <div class="personas-row">
             <div class="personas-info">
               <strong>Adultos</strong>
-              <small>13 años o más</small>
+              <small>18 años o más</small>
             </div>
             <div class="counter">
               <button type="button" class="counter-btn" id="btn-a-menos" onclick="cambiarPersonas('adultos',-1)" disabled>−</button>
@@ -354,7 +357,7 @@
           <div class="personas-row">
             <div class="personas-info">
               <strong>Niños</strong>
-              <small>2 a 12 años</small>
+              <small>5 a 10 años</small>
             </div>
             <div class="counter">
               <button type="button" class="counter-btn" id="btn-n-menos" onclick="cambiarPersonas('ninos',-1)" disabled>−</button>
@@ -365,7 +368,7 @@
           <div class="personas-row">
             <div class="personas-info">
               <strong>Infantes</strong>
-              <small>Menores de 2 años</small>
+              <small>Menores de 5 años</small>
             </div>
             <div class="counter">
               <button type="button" class="counter-btn" id="btn-i-menos" onclick="cambiarPersonas('infantes',-1)" disabled>−</button>
