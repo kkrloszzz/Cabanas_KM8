@@ -6,6 +6,7 @@
 <title>Cabañas 8 Km</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+<script src="../js/main.js"></script>
 </head>
 <body>
 
@@ -23,6 +24,7 @@
 
 <section class="hero">
   <div class="hero-left">
+    <img src="../assets/kabanas-removebg-preview.png" alt="Cabañas KM8" class="hero-logo fade-in">
     <p class="hero-tag fade-in">Curacautín · Región De La Araucanía</p>
     <h1 class="hero-title fade-in">Las <em>mejores cabañas </em><br>de Curacautín </h1>
     <p class="hero-sub fade-in">Si buscas descanso real, conexión con la naturaleza y una experiencia inolvidable, en Cabañas KM8 encontrarás todo lo que necesitas.</p>
@@ -52,7 +54,6 @@
   <span class="strip-item">🏡 Full equipadas</span>
   <span class="strip-dot"></span>
   <span class="strip-item">🏆 Superanfitriones en Airbnb</span>
-  <span class="strip-dot"></span>
 </div>
 
 <section class="section about" id="nosotros">
@@ -98,11 +99,11 @@
         <span class="cabana-img-label">+ Añadir imagen</span>
       </div>
       <div class="cabana-info">
-        <p class="cabana-tag">2–4 personas · Pequeña</p>
-        <h3 class="cabana-name">Cabaña 1</h3>
+        <p class="cabana-tag">1–4 personas · Pequeña</p>
+        <h3 class="cabana-name">Cabaña Conguillio</h3>
         <p class="cabana-desc">Frente al lago con terraza privada, chimenea y vista panorámica al volcán. Ideal para parejas o familias pequeñas.</p>
         <div class="cabana-footer">
-          <div class="cabana-price">$95.000 <span>/ noche</span></div>
+          <div class="cabana-price">$80.000 <span>/ dia</span></div>
           <button class="cabana-book">Reservar</button>
         </div>
       </div>
@@ -115,10 +116,10 @@
       </div>
       <div class="cabana-info">
         <p class="cabana-tag">4–6 personas · Mediana</p>
-        <h3 class="cabana-name">Cabaña 2</h3>
+        <h3 class="cabana-name">Cabaña Malleco</h3>
         <p class="cabana-desc">Sumergida en el bosque nativo, con jacuzzi exterior, dos dormitorios y cocina completamente equipada.</p>
         <div class="cabana-footer">
-          <div class="cabana-price">$130.000 <span>/ noche</span></div>
+          <div class="cabana-price">$130.000 <span>/ dia</span></div>
           <button class="cabana-book">Reservar</button>
         </div>
       </div>
@@ -134,7 +135,7 @@
         <h3 class="cabana-name">Cabaña 3</h3>
         <p class="cabana-desc">Nuestra cabaña más exclusiva. Bañera exterior con vista al lago, sauna privado y servicio de desayuno en cabaña.</p>
         <div class="cabana-footer">
-          <div class="cabana-price">$180.000 <span>/ noche</span></div>
+          <div class="cabana-price">$100.000 <span>/ dia</span></div>
           <button class="cabana-book">Reservar</button>
         </div>
       </div>
@@ -237,24 +238,36 @@
 <section class="section social" id="redes">
   <p class="section-label">Redes sociales</p>
   <h2 class="section-title" style="margin-bottom: 3rem;">Vívelo antes de <em>llegar</em></h2>
-  <div class="social-grid">
-    <div class="social-post">
-      <span class="sp-icon">📸</span>
-      <span class="sp-label">Instagram</span>
+
+  <div class="gallery-container">
+    <button class="gallery-arrow gallery-arrow-left" onclick="moverGaleria(-1)">&#8592;</button>
+
+    <div class="social-grid" id="galeria">
+      <div class="social-post" onclick="abrirLightbox(0)">
+        <img src="../assets/interior.jpg" alt="interior">
+      </div>
+      <div class="social-post" onclick="abrirLightbox(1)">
+        <img src="../assets/tinaja.jpeg" alt="tinaja">
+      </div>
+      <div class="social-post" onclick="abrirLightbox(2)">
+        <img src="../assets/cabana1.jpg" alt="cabaña">
+      </div>
+      <div class="social-post" onclick="abrirLightbox(3)">
+        <img src="../assets/cabanas.png" alt="cabañas">
+      </div>
     </div>
-    <div class="social-post">
-      <span class="sp-icon">📸</span>
-      <span class="sp-label">Instagram</span>
-    </div>
-    <div class="social-post">
-      <span class="sp-icon">📸</span>
-      <span class="sp-label">Instagram</span>
-    </div>
-    <div class="social-post">
-      <span class="sp-icon">📸</span>
-      <span class="sp-label">Instagram</span>
-    </div>
+
+    <button class="gallery-arrow gallery-arrow-right" onclick="moverGaleria(1)">&#8594;</button>
   </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="cerrarLightbox()">
+    <button class="lightbox-close" onclick="cerrarLightbox()">✕</button>
+    <button class="lightbox-prev" onclick="event.stopPropagation(); cambiarLightbox(-1)">&#8592;</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    <button class="lightbox-next" onclick="event.stopPropagation(); cambiarLightbox(1)">&#8594;</button>
+  </div>
+
   <div class="social-links">
     <a href="https://www.instagram.com/cabanas_km8/" class="social-link"><span class="social-link-icon">📸</span> Instagram</a>
     <a href="https://www.facebook.com/cabanas.km.curacautin" class="social-link"><span class="social-link-icon">ⓕ</span> Facebook</a>
@@ -315,10 +328,59 @@
         <label>Cabaña de interés</label>
         <select>
           <option value="">Selecciona...</option>
-          <option>Cabaña Alerce (2–4 personas)</option>
-          <option>Cabaña Coigüe (4–6 personas)</option>
-          <option>Cabaña Raulí (2 personas · Premium)</option>
+          <option>Cabaña 1 (2–4 personas)</option>
+          <option>Cabaña 2 (4–6 personas)</option>
+          <option>Cabaña 3 (2 personas · Premium)</option>
         </select>
+      </div>
+      <div class="form-group">
+        <label>Patente del Vehículo</label>
+        <input type="text" id="patente" placeholder="AB-CD-12" maxlength="8">
+      </div>
+      <div class="form-group">
+        <label>Personas</label>
+        <div class="personas-box">
+          <div class="personas-row">
+            <div class="personas-info">
+              <strong>Adultos</strong>
+              <small>13 años o más</small>
+            </div>
+            <div class="counter">
+              <button type="button" class="counter-btn" id="btn-a-menos" onclick="cambiarPersonas('adultos',-1)" disabled>−</button>
+              <span class="counter-num" id="num-adultos">1</span>
+              <button type="button" class="counter-btn" id="btn-a-mas" onclick="cambiarPersonas('adultos',1)">+</button>
+            </div>
+          </div>
+          <div class="personas-row">
+            <div class="personas-info">
+              <strong>Niños</strong>
+              <small>2 a 12 años</small>
+            </div>
+            <div class="counter">
+              <button type="button" class="counter-btn" id="btn-n-menos" onclick="cambiarPersonas('ninos',-1)" disabled>−</button>
+              <span class="counter-num" id="num-ninos">0</span>
+              <button type="button" class="counter-btn" id="btn-n-mas" onclick="cambiarPersonas('ninos',1)">+</button>
+            </div>
+          </div>
+          <div class="personas-row">
+            <div class="personas-info">
+              <strong>Infantes</strong>
+              <small>Menores de 2 años</small>
+            </div>
+            <div class="counter">
+              <button type="button" class="counter-btn" id="btn-i-menos" onclick="cambiarPersonas('infantes',-1)" disabled>−</button>
+              <span class="counter-num" id="num-infantes">0</span>
+              <button type="button" class="counter-btn" id="btn-i-mas" onclick="cambiarPersonas('infantes',1)">+</button>
+            </div>
+          </div>
+          <div id="edades-ninos" style="display:none; padding-top:10px; border-top:1px solid rgba(0,0,0,0.08); margin-top:4px;">
+            <p style="font-size:12px; color:#888; margin-bottom:8px;">¿Qué edad tienen los niños?</p>
+            <div id="selectores-edad" style="display:flex; flex-wrap:wrap; gap:6px;"></div>
+          </div>
+          <p id="max-warn" style="display:none; font-size:12px; color:#c0392b; margin-top:8px;">Capacidad máxima de 6 personas por cabaña</p>
+        </div>
+        <div id="resumen-personas" style="font-size:13px; color:#666; margin-top:6px;">👥 <strong id="resumen-texto">1 adulto</strong></div>
+        <input type="hidden" id="personas-hidden" name="personas">
       </div>
       <div class="form-group">
         <label>Mensaje (opcional)</label>
@@ -347,8 +409,7 @@
     <div class="footer-col">
       <h4>Información</h4>
       <ul>
-        <li><a href="#">Sobre nosotros</a></li>
-        <li><a href="#">Actividades</a></li>
+        <li><a href="#nosotros">Sobre nosotros</a></li>
         <li><a href="#">Galería</a></li>
         <li><a href="#">Blog</a></li>
       </ul>
@@ -364,8 +425,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 Rincón del Sur · Todos los derechos reservados</span>
-    <span>Panguipulli, Región de Los Ríos, Chile</span>
+    <span>© 2026 Cabañas KM8 · Todos los derechos reservados</span>
+    <span>Curacautiín, Región de La Araucanía, Chile</span>
   </div>
 </footer>
 
