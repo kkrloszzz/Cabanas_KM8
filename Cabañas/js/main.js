@@ -175,8 +175,13 @@ const cabanas = {
     features: ['🛁 Jacuzzi exterior', '🛏 2 dormitorios', '🍳 Cocina completa', '🌳 Bosque nativo', '🐾 Pet Friendly'],
     precio: '$80.000 <span>/ noche</span>',
     imagenes: [
-      '../assets/cabana_malleco.jpeg',
-      '../assets/interior.jpg',
+      '../assets/malleco/cabana_malleco.jpeg',
+      '../assets/malleco/salon_malleco.jpeg',
+      '../assets/malleco/salon2_malleco.jpeg',
+      '../assets/malleco/lavamanos_malleco.jpeg',
+      '../assets/malleco/lavamanos2_malleco.jpeg',
+      '../assets/malleco/pieza1_malleco.jpeg',
+      '../assets/malleco/pieza2_malleco.jpeg',
       '../assets/malleco/malleco.mp4',
     ]
   },
@@ -187,7 +192,7 @@ const cabanas = {
     features: ['🛁 Bañera con vista al lago', '🧖 Sauna privado', '☕ Desayuno incluido', '🌅 Vista panorámica'],
     precio: '$100.000 <span>/ noche</span>',
     imagenes: [
-      '../assets/cabana_icalma.jpeg',
+      '../assets/icalma/cabana_icalma.jpeg',
       '../assets/tinaja.jpeg',
       '../assets/icalma/icalma.mp4',
     ]
