@@ -37,24 +37,7 @@ function actualizarPersonas() {
   ['btn-a-mas', 'btn-n-mas', 'btn-i-mas'].forEach(id => {
     document.getElementById(id).disabled = total >= PERSONAS_MAX;
   });
-  const edades = document.getElementById('edades-ninos');
-  const cont = document.getElementById('selectores-edad');
-  if (personasCounts.ninos > 0) {
-    edades.style.display = 'block';
-    while (cont.querySelectorAll('select').length < personasCounts.ninos) {
-      const sel = document.createElement('select');
-      sel.style.cssText = 'font-size:12px;padding:4px 8px;border-radius:6px;border:1px solid #ddd;background:#f8f8f8;cursor:pointer;';
-      for (let a = 2; a <= 12; a++) {
-        const o = document.createElement('option');
-        o.value = a; o.textContent = a + ' años'; sel.appendChild(o);
-      }
-      cont.appendChild(sel);
-    }
-    while (cont.querySelectorAll('select').length > personasCounts.ninos) cont.removeChild(cont.lastChild);
-  } else {
-    edades.style.display = 'none';
-    cont.innerHTML = '';
-  }
+
   const partes = [personasCounts.adultos === 1 ? '1 adulto' : personasCounts.adultos + ' adultos'];
   if (personasCounts.ninos > 0) partes.push(personasCounts.ninos + (personasCounts.ninos === 1 ? ' niño' : ' niños'));
   if (personasCounts.infantes > 0) partes.push(personasCounts.infantes + (personasCounts.infantes === 1 ? ' infante' : ' infantes'));
@@ -121,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('patente').addEventListener('keyup', function() {
     let raw = this.value.replace(/-/g, '').toUpperCase().replace(/[^A-Z0-9]/g, '');
     if (raw.length > 6) raw = raw.slice(0, 6);
-    let formatted = raw;
+      let formatted = raw;
     if (raw.length > 4) {
       formatted = raw.slice(0, 2) + '-' + raw.slice(2, 4) + '-' + raw.slice(4);
     } else if (raw.length > 2) {
@@ -142,4 +125,139 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 3000);
   }
 
+});
+
+// Mascotas
+let numMascotas = 1;
+
+function toggleMascotas() {
+  const checked = document.getElementById('mascotas-check').checked;
+  const counter = document.getElementById('mascotas-counter');
+  const label = document.getElementById('mascotas-label');
+  counter.classList.toggle('visible', checked);
+  label.textContent = checked ? 'Sí' : 'No';
+}
+
+function cambiarMascotas(delta) {
+  numMascotas = Math.max(1, Math.min(6, numMascotas + delta));
+  document.getElementById('num-mascotas').textContent = numMascotas;
+  document.getElementById('btn-m-menos').disabled = numMascotas <= 1;
+  document.getElementById('btn-m-mas').disabled = numMascotas >= 6;
+}
+
+
+const cabanas = {
+  conguillio: {
+    tag: '1–4 personas · Pequeña',
+    titulo: 'Cabaña Conguillio',
+    desc: 'Una acogedora cabaña pequeña ideal para parejas o familias pequeñas...',
+    features: ['🛁 Tinaja privada', '🔥 Calefacción', '🍳 Cocina equipada', '🐾 Pet Friendly'],
+    precio: '$80.000 <span>/ noche</span>',
+    imagenes: [
+      '../assets/conguillio/cabana_conguillio.jpeg',
+      '../assets/conguillio/cocina_conguillio.jpeg',
+      '../assets/conguillio/cocina_entera_conguillio.jpeg',
+      '../assets/conguillio/mesas_conguillio.jpeg',
+      '../assets/conguillio/mesas2_conguillio.jpeg',
+      '../assets/conguillio/pieza1_conguillio.jpeg',
+      '../assets/conguillio/pieza2_conguillio.jpeg',
+      '../assets/conguillio/pieza3_conguillio.jpeg',
+      '../assets/conguillio/sala_completa_conguillio.jpeg',
+      '../assets/conguillio/salamandra_conguillio.jpeg',
+      '../assets/conguillio/salon_conguillio.jpeg',
+      '../assets/conguillio/conguillio.mp4',
+    ]
+  },
+  malleco: {
+    tag: '4–6 personas · Mediana',
+    titulo: 'Cabaña Malleco',
+    desc: 'Sumergida en el bosque nativo, la Cabaña Malleco ofrece espacio y comodidad...',
+    features: ['🛁 Jacuzzi exterior', '🛏 2 dormitorios', '🍳 Cocina completa', '🌳 Bosque nativo', '🐾 Pet Friendly'],
+    precio: '$80.000 <span>/ noche</span>',
+    imagenes: [
+      '../assets/cabana_malleco.jpeg',
+      '../assets/interior.jpg',
+      '../assets/malleco/malleco.mp4',
+    ]
+  },
+  icalma: {
+    tag: '2 personas · Premium',
+    titulo: 'Cabaña Icalma',
+    desc: 'Nuestra cabaña más exclusiva. Diseñada para una experiencia premium...',
+    features: ['🛁 Bañera con vista al lago', '🧖 Sauna privado', '☕ Desayuno incluido', '🌅 Vista panorámica'],
+    precio: '$100.000 <span>/ noche</span>',
+    imagenes: [
+      '../assets/cabana_icalma.jpeg',
+      '../assets/tinaja.jpeg',
+      '../assets/icalma/icalma.mp4',
+    ]
+  }
+};
+
+let carruselIndex = 0;
+let carruselImagenes = [];
+
+function abrirModal(id) {
+  const c = cabanas[id];
+  if (!c) return;
+
+  carruselImagenes = c.imagenes;
+  carruselIndex = 0;
+
+  document.getElementById('modal-tag').textContent = c.tag;
+  document.getElementById('modal-titulo').textContent = c.titulo;
+  document.getElementById('modal-desc').textContent = c.desc;
+  document.getElementById('modal-price').innerHTML = c.precio;
+  document.getElementById('modal-features').innerHTML = c.features
+    .map(f => `<span class="modal-feature">${f}</span>`).join('');
+
+  actualizarCarrusel();
+  document.getElementById('modal-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function actualizarCarrusel() {
+  const media = document.getElementById('modal-media');
+  const total = carruselImagenes.length;
+  const src = carruselImagenes[carruselIndex];
+  const esVideo = src.match(/\.(mp4|webm|mov)$/i);
+
+  const mediaHTML = esVideo
+    ? `<video src="${src}" autoplay muted loop playsinline></video>`
+    : `<img src="${src}" alt="foto cabaña">`;
+
+  media.innerHTML = `
+    ${mediaHTML}
+    ${total > 1 ? `
+      <button class="modal-carr-btn modal-carr-prev" onclick="moverCarrusel(-1)">&#8592;</button>
+      <button class="modal-carr-btn modal-carr-next" onclick="moverCarrusel(1)">&#8594;</button>
+      <div class="modal-carr-dots">
+        ${carruselImagenes.map((_, i) => `
+          <span class="modal-carr-dot ${i === carruselIndex ? 'active' : ''}" onclick="irASlide(${i})"></span>
+        `).join('')}
+      </div>
+    ` : ''}
+  `;
+}
+
+function moverCarrusel(dir) {
+  carruselIndex = (carruselIndex + dir + carruselImagenes.length) % carruselImagenes.length;
+  actualizarCarrusel();
+}
+
+function irASlide(i) {
+  carruselIndex = i;
+  actualizarCarrusel();
+}
+
+function cerrarModal() {
+  document.getElementById('modal-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') cerrarModal();
+  if (e.key === 'ArrowLeft') moverCarrusel(-1);
+  if (e.key === 'ArrowRight') moverCarrusel(1);
 });

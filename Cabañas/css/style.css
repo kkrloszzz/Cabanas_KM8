@@ -316,6 +316,16 @@ nav {
 }
 .cabana-book:hover { opacity: 0.75; }
 
+.cabana-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+
 /* ── REVIEWS ── */
 .reviews { background: var(--black); color: var(--white); }
 .reviews .section-label { color: #5a5855; }
@@ -796,3 +806,267 @@ footer {
 .whatsapp-btn:hover {
   transform: scale(1.1);
 }
+
+/* Mascotas Toggle */
+.mascotas-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  border-radius: 26px;
+  transition: background 0.3s;
+}
+
+.toggle-slider::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  top: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: #000000;
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(22px);
+}
+
+.toggle-label {
+  font-size: 14px;
+  color: #555;
+  font-weight: 500;
+  min-width: 24px;
+}
+
+/* Caja de contador de mascotas */
+.mascotas-counter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f5f0eb;
+  border: 1px solid #e0d8cf;
+  border-radius: 10px;
+  padding: 8px 16px;
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, max-width 0.4s ease, padding 0.3s ease;
+  white-space: nowrap;
+}
+
+.mascotas-counter.visible {
+  opacity: 1;
+  max-width: 260px;
+  pointer-events: all;
+}
+
+.mascotas-counter-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* ── MODAL CABAÑA ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.modal-overlay.active { display: flex; }
+
+.modal-cabana {
+  background: var(--white);
+  max-width: 1100px;
+  width: 100%;
+  max-height: 95vh;
+  overflow-y: auto;
+  position: relative;
+  display: grid;
+  grid-template-columns: 3fr 2fr;   
+  align-items: start;
+}
+
+.modal-media {
+  height: 100%;
+  min-height: 800px;
+  overflow: hidden;
+  position: relative;
+  background: var(--gray-light);
+}
+.modal-media img,
+.modal-media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-body {
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+.modal-close:hover { opacity: 0.7; }
+
+.modal-tag {
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+}
+
+.modal-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.1;
+}
+
+.modal-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--gray-dark);
+}
+
+.modal-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.modal-feature {
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: var(--gray-light);
+  color: var(--gray-dark);
+  padding: 0.4rem 0.8rem;
+  border: 0.5px solid var(--gray-mid);
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 0.5px solid var(--gray-light);
+  padding-top: 1rem;
+  margin-top: auto;
+}
+.modal-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.modal-price span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--gray-mid);
+}
+
+@media (max-width: 700px) {
+  .modal-cabana { grid-template-columns: 1fr; }
+  .modal-media { min-height: 240px; }
+}
+
+
+.modal-media {
+  width: 100%;
+  background: var(--black);
+  position: relative;  /* ← necesario para los botones */
+}
+
+.modal-carr-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.55);
+  color: var(--white);
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.modal-carr-btn:hover { background: rgba(0,0,0,0.85); }
+.modal-carr-prev { left: 0.8rem; }
+.modal-carr-next { right: 0.8rem; }
+
+.modal-carr-dots {
+  position: absolute;
+  bottom: 0.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+.modal-carr-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modal-carr-dot.active { background: var(--white); }

@@ -96,9 +96,9 @@
   <h2 class="section-title" style="margin-bottom: 3rem;">Elige tu <em>cabaña</em></h2>
   <div class="cabanas-grid">
 
-    <div class="cabana-card">
+    <div class="cabana-card" onclick="abrirModal('conguillio')">
       <div class="cabana-img">
-        <!-- Poner imagen -->
+        <img src="../assets/conguillio/cabana_conguillio.jpeg" alt="Conguillio">
       </div>
       <div class="cabana-info">
         <p class="cabana-tag">1–4 personas · Pequeña</p>
@@ -106,37 +106,34 @@
         <p class="cabana-desc">Cabaña pequeña</p>
         <div class="cabana-footer">
           <div class="cabana-price">$80.000 <span>/ dia</span></div>
-          <button href="https://www.facebook.com/cabanas.km.curacautin" class="cabana-book">Reservar</button>
         </div>
       </div>
     </div>
 
-    <div class="cabana-card">
+    <div class="cabana-card" onclick="abrirModal('malleco')">
       <div class="cabana-img">
-        <!-- Poner imagen -->
+        <img src="../assets/malleco/cabana_malleco.jpeg" alt="">
       </div>
       <div class="cabana-info">
         <p class="cabana-tag">4–6 personas · Mediana</p>
         <h3 class="cabana-name">Cabaña Malleco</h3>
         <p class="cabana-desc">Sumergida en el bosque nativo, con jacuzzi exterior, dos dormitorios y cocina completamente equipada.</p>
         <div class="cabana-footer">
-          <div class="cabana-price">$90.000 <span>/ dia</span></div>
-          <button class="cabana-book">Reservar</button>
+          <div class="cabana-price">$80.000 <span>/ dia</span></div>
         </div>
       </div>
     </div>
 
-    <div class="cabana-card">
+    <div class="cabana-card" onclick="abrirModal('icalma')">
       <div class="cabana-img">
-        <!-- Poner imagen -->
+        <img src="../assets/icalma/cabana_icalma.jpeg" alt="icalma">
       </div>
       <div class="cabana-info">
         <p class="cabana-tag">2 personas · Familiar</p>
-        <h3 class="cabana-name">Cabaña 3</h3>
+        <h3 class="cabana-name">Cabaña Icalma</h3>
         <p class="cabana-desc">Nuestra cabaña más exclusiva. Bañera exterior con vista al lago, sauna privado y servicio de desayuno en cabaña.</p>
         <div class="cabana-footer">
           <div class="cabana-price">$100.000 <span>/ dia</span></div>
-          <button class="cabana-book">Reservar</button>
         </div>
       </div>
     </div>
@@ -208,7 +205,7 @@
           <div class="location-icon">✈️</div>
           <div class="location-item-text">
             <strong>Desde Temuco</strong>
-            <span>1 hora Y 30 minutos en auto ingresando por Lautaro</span>
+            <span>1 hora y 30 minutos en auto ingresando por Lautaro</span>
           </div>
         </div>
         <div class="location-item">
@@ -222,7 +219,7 @@
           <div class="location-icon">📞</div>
           <div class="location-item-text">
             <strong>Contacto directo</strong>
-            <span>+56 9 5207 5800 · cabanas8km@gmail.com</span>
+            <span>+56 9 5207 5800 | +56 9 9825 4524 | turismokilometro8@gmail.com</span>
           </div>
         </div>
       </div>
@@ -368,14 +365,29 @@
               <button type="button" class="counter-btn" id="btn-i-mas" onclick="cambiarPersonas('infantes',1)">+</button>
             </div>
           </div>
-          <div id="edades-ninos" style="display:none; padding-top:10px; border-top:1px solid rgba(0,0,0,0.08); margin-top:4px;">
-            <p style="font-size:12px; color:#888; margin-bottom:8px;">¿Qué edad tienen los niños?</p>
-            <div id="selectores-edad" style="display:flex; flex-wrap:wrap; gap:6px;"></div>
-          </div>
           <p id="max-warn" style="display:none; font-size:12px; color:#c0392b; margin-top:8px;">Capacidad máxima de 6 personas por cabaña</p>
         </div>
         <div id="resumen-personas" style="font-size:13px; color:#666; margin-top:6px;">👥 <strong id="resumen-texto">1 adulto</strong></div>
         <input type="hidden" id="personas-hidden" name="personas">
+      </div>
+      <div class="form-group mascotas-section">
+        <label>¿Traes Mascotas?</label>
+        <div class="mascotas-toggle">
+          <label class="toggle-switch">
+            <input type="checkbox" id="mascotas-check" onchange="toggleMascotas()">
+            <span class="toggle-slider"></span>
+          </label>
+          <span class="toggle-label" id="mascotas-label">No</span>
+
+          <div class="mascotas-counter" id="mascotas-counter">
+            <span class="mascotas-counter-label">🐾 ¿Cuántas?</span>
+            <div class="counter">
+              <button type="button" class="counter-btn" id="btn-m-menos" onclick="cambiarMascotas(-1)" disabled>−</button>
+              <span class="counter-num" id="num-mascotas">1</span>
+              <button type="button" class="counter-btn" id="btn-m-mas" onclick="cambiarMascotas(1)">+</button>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label>Mensaje (opcional)</label>
@@ -398,12 +410,11 @@
       <p>Cabañas de montaña en el corazón del lago Panguipulli. Un refugio de paz, naturaleza y autenticidad en el sur de Chile.</p>
     </div>
     <div class="footer-col">
-      <h4>Alojamiento</h4>
+      <h4>Redes Sociales</h4>
       <ul>
-        <li><a href="#">Cabaña Alerce</a></li>
-        <li><a href="#">Cabaña Coigüe</a></li>
-        <li><a href="#">Cabaña Raulí</a></li>
-        <li><a href="#">Tarifas</a></li>
+        <li><a href="https://www.facebook.com/cabanas.km.curacautin ">Facebook</a></li>
+        <li><a href="https://www.instagram.com/cabanas_km8/">Instagram</a></li>
+        <li><a href="https://www.airbnb.cl/rooms/1011163247561785347?source_impression_id=p3_1776221633_P3oqOCZ7-CprQ21W">Airbnb</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -417,9 +428,10 @@
     <div class="footer-col">
       <h4>Contacto</h4>
       <ul>
-        <li><a href="#">hola@rincondelsur.cl</a></li>
-        <li><a href="#">+56 9 1234 5678</a></li>
-        <li><a href="#">Instagram</a></li>
+        <li><a href="#">turismokilometro8@gmail.com</a></li>
+        <li><a href="#">+56 9 5207 5800</a></li>
+        <li><a href="#">+56 9 9825 4524</a></li>
+
       </ul>
     </div>
   </div>
@@ -429,5 +441,22 @@
   </div>
 </footer>
 
+<!-- Modal Cabañas -->
+<div class="modal-overlay" id="modal-overlay" onclick="cerrarModal()">
+  <div class="modal-cabana" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="cerrarModal()">✕</button>
+    <div class="modal-media" id="modal-media"></div>
+    <div class="modal-body">
+      <p class="modal-tag" id="modal-tag"></p>
+      <h2 class="modal-titulo" id="modal-titulo"></h2>
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-features" id="modal-features"></div>
+      <div class="modal-footer">
+        <div class="modal-price" id="modal-price"></div>
+        <button class="cabana-book" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'}); cerrarModal()">Reservar Ahora</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
