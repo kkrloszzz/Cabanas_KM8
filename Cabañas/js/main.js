@@ -13,8 +13,8 @@ const personasCounts = { adultos: 1, ninos: 1, infantes: 0 };
 const PERSONAS_MAX = 6;
 
 function cambiarPersonas(tipo, delta) {
-  const total = personasCounts.adultos + personasCounts.ninos + personasCounts.infantes;
-  if (delta > 0 && total >= PERSONAS_MAX) {
+  const total = personasCounts.adultos + personasCounts.ninos;
+  if (delta > 0 && total >= PERSONAS_MAX && tipo !== 'infantes') {
     document.getElementById('max-warn').style.display = 'block';
     return;
   }
@@ -25,7 +25,6 @@ function cambiarPersonas(tipo, delta) {
   if (tipo === 'adultos') personasCounts.adultos = Math.max(1, personasCounts.adultos);
   actualizarPersonas();
 }
-
 function actualizarPersonas() {
   ['adultos', 'ninos', 'infantes'].forEach(t => {
     document.getElementById('num-' + t).textContent = personasCounts[t];
@@ -33,7 +32,7 @@ function actualizarPersonas() {
   document.getElementById('btn-a-menos').disabled = personasCounts.adultos <= 1;
   document.getElementById('btn-n-menos').disabled = personasCounts.ninos <= 0;
   document.getElementById('btn-i-menos').disabled = personasCounts.infantes <= 0;
-  const total = personasCounts.adultos + personasCounts.ninos + personasCounts.infantes;
+  const total = personasCounts.adultos + personasCounts.ninos;
   ['btn-a-mas', 'btn-n-mas', 'btn-i-mas'].forEach(id => {
     document.getElementById(id).disabled = total >= PERSONAS_MAX;
   });
@@ -172,7 +171,7 @@ const cabanas = {
   malleco: {
     tag: '4–6 personas · Mediana',
     titulo: 'Cabaña Malleco',
-    desc: 'Un oasis idílico. El cantero de rosas blancas y el cercado de troncos lo convierten en un rincón romántico.\n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
+    desc: '🌼Un oasis idílico. El cantero de rosas blancas y el cercado de troncos lo convierten en un rincón romántico.\n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
     features: ['🛁 Jacuzzi exterior', '🛏 2 dormitorios', '🍳 Cocina completa', '🌳 Bosque nativo', '🐾 Pet Friendly'],
     reglamento: '../assets/NORMAS.pdf',
     precio: '$80.000 <span>/ noche</span>',

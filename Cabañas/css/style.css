@@ -1029,7 +1029,7 @@ footer {
 .modal-media {
   width: 100%;
   background: var(--black);
-  position: relative;  /* ← necesario para los botones */
+  position: relative; 
 }
 
 .modal-carr-btn {
