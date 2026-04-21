@@ -150,8 +150,9 @@ const cabanas = {
   conguillio: {
     tag: '1–4 personas · Pequeña',
     titulo: 'Cabaña Conguillio',
-    desc: 'Una acogedora cabaña pequeña ideal para parejas o familias pequeñas...',
+    desc: '💆‍♂️Un lugar con un gran ambiente natural para disfrutar.\nCuenta con tinaja privada y vistas al bosque.\n Perfecta para desconectarse. \n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink',
     features: ['🛁 Tinaja privada', '🔥 Calefacción', '🍳 Cocina equipada', '🐾 Pet Friendly'],
+    reglamento: '../assets/NORMAS.pdf',
     precio: '$80.000 <span>/ noche</span>',
     imagenes: [
       '../assets/conguillio/cabana_conguillio.jpeg',
@@ -171,8 +172,9 @@ const cabanas = {
   malleco: {
     tag: '4–6 personas · Mediana',
     titulo: 'Cabaña Malleco',
-    desc: 'Sumergida en el bosque nativo, la Cabaña Malleco ofrece espacio y comodidad...',
+    desc: 'Un oasis idílico. El cantero de rosas blancas y el cercado de troncos lo convierten en un rincón romántico.\n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
     features: ['🛁 Jacuzzi exterior', '🛏 2 dormitorios', '🍳 Cocina completa', '🌳 Bosque nativo', '🐾 Pet Friendly'],
+    reglamento: '../assets/NORMAS.pdf',
     precio: '$80.000 <span>/ noche</span>',
     imagenes: [
       '../assets/malleco/cabana_malleco.jpeg',
@@ -188,13 +190,20 @@ const cabanas = {
   icalma: {
     tag: '2 personas · Premium',
     titulo: 'Cabaña Icalma',
-    desc: 'Nuestra cabaña más exclusiva. Diseñada para una experiencia premium...',
+    desc: '🌲Moderna, rústica y acogedora. Con su fachada de madera oscura y terraza, un refugio perfecto con estilo. \n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
     features: ['🛁 Bañera con vista al lago', '🧖 Sauna privado', '☕ Desayuno incluido', '🌅 Vista panorámica'],
+    reglamento: '../assets/NORMAS.pdf',
     precio: '$100.000 <span>/ noche</span>',
     imagenes: [
-      '../assets/icalma/cabana_icalma.jpeg',
-      '../assets/tinaja.jpeg',
-      '../assets/icalma/icalma.mp4',
+      '../assets/icalma/cabana_icalma.png',
+      '../assets/icalma/salon1_icalma.jpeg',
+      '../assets/icalma/salon2_icalma.jpeg',
+      '../assets/icalma/ventana_icalma.jpeg',
+      '../assets/icalma/cocina_icalma.jpeg',
+      '../assets/icalma/pieza_icalma.jpeg',
+      '../assets/icalma/baño_icalma.jpeg',
+      '../assets/icalma/presentacionIcalma.mp4',
+      '../assets/icalma/cabana_icalma.mp4',
     ]
   }
 };
@@ -211,7 +220,9 @@ function abrirModal(id) {
 
   document.getElementById('modal-tag').textContent = c.tag;
   document.getElementById('modal-titulo').textContent = c.titulo;
-  document.getElementById('modal-desc').textContent = c.desc;
+  document.getElementById('modal-desc').innerHTML = c.desc.replace(/\n/g, '<br>');
+  document.getElementById('modal-reglamento').href = c.reglamento || '#';
+  document.getElementById('modal-reglamento').style.display = c.reglamento ? 'inline-flex' : 'none';
   document.getElementById('modal-price').innerHTML = c.precio;
   document.getElementById('modal-features').innerHTML = c.features
     .map(f => `<span class="modal-feature">${f}</span>`).join('');
