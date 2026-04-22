@@ -270,9 +270,115 @@ function cerrarModal() {
   document.body.style.overflow = '';
 }
 
+function enviarReserva() {
+  const nombre = document.getElementById('nombre').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const telefono = document.getElementById('telefono').value.trim();
+  const checkin = document.getElementById('checkin').value;
+  const checkout = document.getElementById('checkout').value;
+  const cabana = document.getElementById('cabana-select').value;
+  const mensaje = document.getElementById('mensaje').value.trim();
+
+  if (!nombre || !email || !telefono || !checkin || !checkout || !cabana) {
+    alert('Por favor completa todos los campos obligatorios.');
+    return;
+  }
+
+  const resumen = `
+✅ Solicitud de Reserva
+
+👤 Nombre: ${nombre}
+📧 Email: ${email}
+📞 Teléfono: ${telefono}
+🏡 Cabaña: ${cabana}
+📅 Check-in: ${checkin}
+📅 Check-out: ${checkout}
+${mensaje ? '💬 Mensaje: ' + mensaje : ''}
+  `.trim();
+
+  alert(resumen);
+}
+
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') cerrarModal();
   if (e.key === 'ArrowLeft') moverCarrusel(-1);
   if (e.key === 'ArrowRight') moverCarrusel(1);
 });
+
+function enviarReserva() {
+  const nombre = document.getElementById('nombre').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const telefono = document.getElementById('telefono').value.trim();
+  const checkin = document.getElementById('checkin').value;
+  const checkout = document.getElementById('checkout').value;
+  const cabana = document.getElementById('cabana-select').value;
+  const patente = document.getElementById('patente').value.trim();
+  const personas = document.getElementById('resumen-texto').textContent;
+  const mensaje = document.getElementById('mensaje').value.trim();
+  const mascotas = document.getElementById('mascotas-check').checked
+    ? `Sí, ${document.getElementById('num-mascotas').textContent}`
+    : 'No';
+
+  if (!nombre || !email || !telefono || !checkin || !checkout || !cabana || !patente) {
+    alert('⚠️ Por favor completa todos los campos obligatorios.');
+    return;
+  }
+
+  const filas = [
+    { label: 'Nombre', valor: nombre },
+    { label: 'Email', valor: email },
+    { label: 'Teléfono', valor: telefono },
+    { label: 'Cabaña', valor: cabana },
+    { label: 'Check-in', valor: checkin },
+    { label: 'Check-out', valor: checkout },
+    { label: 'Patente', valor: patente },
+    { label: 'Personas', valor: personas },
+    { label: 'Mascotas', valor: mascotas },
+    ...(mensaje ? [{ label: 'Mensaje', valor: mensaje }] : [])
+  ];
+
+  document.getElementById('reserva-body').innerHTML = filas
+    .map(f => `
+      <div class="reserva-fila">
+        <span class="reserva-fila-label">${f.label}</span>
+        <span class="reserva-fila-valor">${f.valor}</span>
+      </div>
+    `).join('');
+
+  document.getElementById('reserva-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarReserva() {
+  document.getElementById('reserva-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function confirmarReserva() {
+  const params = {
+    nombre:   document.getElementById('nombre').value.trim(),
+    email:    document.getElementById('email').value.trim(),
+    telefono: document.getElementById('telefono').value.trim(),
+    cabana:   document.getElementById('cabana-select').value,
+    checkin:  document.getElementById('checkin').value,
+    checkout: document.getElementById('checkout').value,
+    patente:  document.getElementById('patente').value.trim() || 'No indicada',
+    personas: document.getElementById('resumen-texto').textContent,
+    mascotas: document.getElementById('mascotas-check').checked
+      ? `Sí, ${document.getElementById('num-mascotas').textContent}`
+      : 'No',
+    mensaje:  document.getElementById('mensaje').value.trim() || 'Sin mensaje'
+  };
+
+  emailjs.send('service_gzfdeb9', 'template_beffc3d', params)
+    .then(() => {
+      cerrarReserva();
+      // Acá puedes mostrar un mensaje bonito en vez del alert
+      alert('✅ ¡Solicitud enviada! Nos pondremos en contacto contigo a la brevedad.');
+    })
+    .catch((error) => {
+      console.error('Error al enviar:', error);
+      alert('❌ Hubo un error al enviar. Intenta de nuevo o contáctanos directamente.');
+    });
+}

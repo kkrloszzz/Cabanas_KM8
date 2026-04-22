@@ -1089,3 +1089,68 @@ footer {
   color: var(--black);
   border-color: var(--black);
 }
+
+.reserva-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.reserva-overlay.active { display: flex; }
+.reserva-modal {
+  background: var(--white);
+  max-width: 520px;
+  width: 90%;
+  padding: 3rem;
+  position: relative;
+}
+.reserva-close {
+  position: absolute;
+  top: 1.2rem; right: 1.5rem;
+  background: none; border: none;
+  font-size: 1.2rem; cursor: pointer;
+  color: var(--gray-mid);
+}
+.reserva-label {
+  font-size: 0.6rem; font-weight: 600; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--gray-mid); margin-bottom: 0.8rem;
+}
+.reserva-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 700;
+  color: var(--black); margin-bottom: 2rem; line-height: 1.3;
+}
+.reserva-titulo em { font-style: italic; font-weight: 400; }
+.reserva-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  border-top: 0.5px solid var(--gray-light);
+  padding-top: 1.5rem;
+}
+.reserva-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 0.85rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 0.5px solid var(--gray-light);
+}
+.reserva-fila-label {
+  font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--gray-mid);
+}
+.reserva-fila-valor {
+  color: var(--black); font-weight: 500; text-align: right; max-width: 60%;
+}
+.reserva-actions {
+  display: flex; gap: 1rem;
+}
+.reserva-actions .btn-primary,
+.reserva-actions .btn-ghost {
+  flex: 1; text-align: center;
+}
