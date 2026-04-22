@@ -99,16 +99,35 @@ document.addEventListener('DOMContentLoaded', function() {
   // Personas
   actualizarPersonas();
 
+
+   const hoy = new Date().toISOString().split('T')[0];
+  document.getElementById('checkin').min = hoy;
+  document.getElementById('checkout').min = hoy;
+
+  document.getElementById('checkin').addEventListener('change', function () {
+    const checkout = document.getElementById('checkout');
+    checkout.min = this.value;
+    if (checkout.value && checkout.value <= this.value) {
+      checkout.value = '';
+    }
+  });
+
+
   // Patente
   document.getElementById('patente').addEventListener('keyup', function() {
-    let raw = this.value.replace(/-/g, '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    let raw = this.value.replace(/-/g, '').toUpperCase();
+    let letras = raw.replace(/[^A-Z]/g, '').slice(0, 4);
+    let numeros = raw.replace(/[^0-9]/g, '').slice(0, 2);
+    raw = letras + numeros;
     if (raw.length > 6) raw = raw.slice(0, 6);
-      let formatted = raw;
+
+    let formatted = raw;
     if (raw.length > 4) {
       formatted = raw.slice(0, 2) + '-' + raw.slice(2, 4) + '-' + raw.slice(4);
     } else if (raw.length > 2) {
       formatted = raw.slice(0, 2) + '-' + raw.slice(2);
     }
+
     this.value = formatted;
   });
 
@@ -299,10 +318,18 @@ function enviarReserva() {
     return;
   }
 
+  if(nombre.length<3){
+    const err = document.getElementById('form-error');
+    err.textContent = 'La cantidad mínima de caracteres es de 3.';
+    err.style.display = 'block';
+    err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     const err = document.getElementById('form-error');
-    err.textContent = '⚠️ Por favor ingresa un correo electrónico válido.';
+    err.textContent = 'Por favor ingresa un correo electrónico válido.';
     err.style.display = 'block';
     err.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
@@ -311,11 +338,12 @@ function enviarReserva() {
   const telefonoRegex = /^\+?[0-9]{11,12}$/;
   if (!telefonoRegex.test(telefono.replace(/\s/g, ''))) {
     const err = document.getElementById('form-error');
-    err.textContent = '⚠️ Ingresa un teléfono válido, ej: +56912344567';
+    err.textContent = 'Ingresa un teléfono válido, ej: +56912344567';
     err.style.display = 'block';
     err.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
+
 
   document.getElementById('form-error').style.display = 'none';
 
