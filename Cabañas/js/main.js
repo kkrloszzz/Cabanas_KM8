@@ -152,7 +152,7 @@ const cabanas = {
     desc: '💆‍♂️Un lugar con un gran ambiente natural para disfrutar.\nCuenta con tinaja privada y vistas al bosque.\n Perfecta para desconectarse. \n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink',
     features: ['🛁 Tinaja privada', '🔥 Calefacción', '🍳 Cocina equipada', '🐾 Pet Friendly'],
     reglamento: '../assets/NORMAS.pdf',
-    precio: '$80.000 <span>/ noche</span>',
+    precio: '$100.000 <span>/ noche</span>',
     imagenes: [
       '../assets/conguillio/cabana_conguillio.jpeg',
       '../assets/conguillio/cocina_conguillio.jpeg',
@@ -192,7 +192,7 @@ const cabanas = {
     desc: '🌲Moderna, rústica y acogedora. Con su fachada de madera oscura y terraza, un refugio perfecto con estilo. \n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
     features: ['🛁 Bañera con vista al lago', '🧖 Sauna privado', '☕ Desayuno incluido', '🌅 Vista panorámica'],
     reglamento: '../assets/NORMAS.pdf',
-    precio: '$100.000 <span>/ noche</span>',
+    precio: '$80.000 <span>/ noche</span>',
     imagenes: [
       '../assets/icalma/cabana_icalma.png',
       '../assets/icalma/salon1_icalma.jpeg',
@@ -293,9 +293,31 @@ function enviarReserva() {
     : 'No';
 
   if (!nombre || !email || !telefono || !checkin || !checkout || !cabana || !patente) {
-    alert('⚠️ Por favor completa todos los campos obligatorios.');
+    const err = document.getElementById('form-error');
+    err.style.display = 'block';
+    err.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    const err = document.getElementById('form-error');
+    err.textContent = '⚠️ Por favor ingresa un correo electrónico válido.';
+    err.style.display = 'block';
+    err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  const telefonoRegex = /^\+?[0-9]{11,12}$/;
+  if (!telefonoRegex.test(telefono.replace(/\s/g, ''))) {
+    const err = document.getElementById('form-error');
+    err.textContent = '⚠️ Ingresa un teléfono válido, ej: +56912344567';
+    err.style.display = 'block';
+    err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  document.getElementById('form-error').style.display = 'none';
 
   const filas = [
     { label: 'Nombre', valor: nombre },
@@ -326,8 +348,12 @@ function cerrarReserva() {
   document.getElementById('reserva-overlay').classList.remove('active');
   document.body.style.overflow = '';
 }
-
 function confirmarReserva() {
+  const btn = document.getElementById('btn-confirmar');
+  if (btn.disabled) return;
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
   const params = {
     nombre:   document.getElementById('nombre').value.trim(),
     email:    document.getElementById('email').value.trim(),
@@ -346,11 +372,38 @@ function confirmarReserva() {
   emailjs.send('service_gzfdeb9', 'template_beffc3d', params)
     .then(() => {
       cerrarReserva();
-      // Acá puedes mostrar un mensaje bonito en vez del alert
-      alert('✅ ¡Solicitud enviada! Nos pondremos en contacto contigo a la brevedad.');
+      document.getElementById('reserva-exito').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      btn.textContent = 'Enviado ✓';
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = 'Confirmar y Enviar';
+      }, 6000);
     })
     .catch((error) => {
       console.error('Error al enviar:', error);
       alert('❌ Hubo un error al enviar. Intenta de nuevo o contáctanos directamente.');
+      btn.disabled = false;
+      btn.textContent = 'Confirmar y Enviar';
     });
+}
+
+function cerrarExito() {
+  document.getElementById('reserva-exito').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function abrirPoliticas() {
+  document.getElementById('politicas-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarPoliticas() {
+  document.getElementById('politicas-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function toggleBotonReserva() {
+  const acepta = document.getElementById('acepta-politicas').checked;
+  document.getElementById('btn-enviar').disabled = !acepta;
 }

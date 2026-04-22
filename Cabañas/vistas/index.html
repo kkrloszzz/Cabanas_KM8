@@ -312,7 +312,7 @@
         </div>
         <div class="form-group">
           <label>Teléfono*</label>
-          <input type="tel" id="telefono" placeholder="+56 9 ...">
+          <input type="tel" id="telefono" placeholder="+56 9 ..." maxlength="13" oninput="this.value = this.value.replace(/[^0-9+]/g, '')">
         </div>
       </div>
       <div class="form-row">
@@ -402,7 +402,17 @@
         <label>Mensaje (opcional)</label>
         <textarea id="mensaje" placeholder="Cuéntanos algo más sobre tu visita..."></textarea>
       </div>
-      <button class="form-submit" onclick="enviarReserva()">Enviar Solicitud de Reserva</button>
+      <div id="form-error" style="display:none; background:#fef2f2; border-left:3px solid #c0392b; padding:0.8rem 1rem; margin-bottom:1rem; font-size:0.8rem; color:#c0392b;">
+        ⚠️ Por favor completa todos los campos obligatorios antes de continuar.
+      </div>
+      <div class="politicas-check">
+  <input type="checkbox" id="acepta-politicas" onchange="toggleBotonReserva()">
+  <label for="acepta-politicas">He leído y acepto las <a href="#" onclick="abrirPoliticas(); return false;">políticas de reserva y cancelación</a></label>
+</div>
+<div id="form-error" style="display:none; background:#fef2f2; border-left:3px solid #c0392b; padding:0.8rem 1rem; margin-bottom:1rem; font-size:0.8rem; color:#c0392b;">
+  ⚠️ Por favor completa todos los campos obligatorios antes de continuar.
+</div>
+<button class="form-submit" id="btn-enviar" onclick="enviarReserva()" disabled>Enviar Solicitud de Reserva</button>
     </div>
   </div>
 </section>
@@ -466,6 +476,32 @@
     </div>
   </div>
 </div>
+<div class="politicas-overlay" id="politicas-overlay" onclick="cerrarPoliticas()">
+  <div class="politicas-modal" onclick="event.stopPropagation()">
+    <button class="reserva-close" onclick="cerrarPoliticas()">✕</button>
+    <p class="reserva-label">Cabañas KM8</p>
+    <h3 class="reserva-titulo">Políticas de reserva<br><em>y cancelación</em></h3>
+    <div class="politicas-body">
+      <p class="politicas-intro">Para realizar la reserva de una o más cabañas, se deberá pagar mediante transferencia electrónica el <strong>50% del valor total</strong> de la estadía.</p>
+
+      <h4>1. Valores de devolución</h4>
+      <p>El valor de la reserva corresponde al 50% del monto total por los días de hospedaje solicitado. Su devolución por anulación se considerará así:</p>
+      <ul>
+        <li>Anulación con <strong>15 o más días</strong> de anticipación → reembolso del <strong>100%</strong></li>
+        <li>Anulación entre <strong>14 y 5 días</strong> de anticipación → reembolso del <strong>50%</strong></li>
+        <li>Anulación con <strong>menos de 5 días</strong> de anticipación → reembolso del <strong>10%</strong></li>
+        <li>Anulación <strong>1 día antes</strong> de la estadía → <strong>sin reembolso</strong></li>
+      </ul>
+
+      <h4>2. Cancelación estando alojado</h4>
+      <p>Si el pasajero ya se encuentra alojado y se retira antes de la fecha final de su estadía, no existirá devolución de dinero.</p>
+
+      <h4>3. Cancelaciones por desastres naturales</h4>
+      <p>En caso de cancelación por desastres naturales, se dará la opción de cambiar la fecha sin cobro adicional dentro del año siguiente a la fecha de entrada.</p>
+    </div>
+    <button class="btn-primary" onclick="cerrarPoliticas()" style="width:100%; margin-top:1.5rem;">Entendido</button>
+  </div>
+</div>
 <div class="reserva-overlay" id="reserva-overlay" onclick="cerrarReserva()">
   <div class="reserva-modal" onclick="event.stopPropagation()">
     <button class="reserva-close" onclick="cerrarReserva()">✕</button>
@@ -474,8 +510,20 @@
     <div class="reserva-body" id="reserva-body"></div>
     <div class="reserva-actions">
       <button class="btn-ghost" onclick="cerrarReserva()">Corregir</button>
-      <button class="btn-primary" onclick="confirmarReserva()">Confirmar y Enviar</button>
+      <button class="btn-primary" id="btn-confirmar" onclick="confirmarReserva()">Confirmar y Enviar</button>
     </div>
+  </div>
+</div>
+
+<div class="reserva-exito" id="reserva-exito">
+  <div class="reserva-exito-modal">
+    <span class="reserva-exito-icon">✓</span>
+    <p class="reserva-label">Solicitud enviada</p>
+    <h3 class="reserva-titulo">¡Recibimos tu reserva,<br><em>te contactaremos pronto!</em></h3>
+    <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--gray-dark); margin-bottom:2rem;">
+      Mantente atento a tu correo para conocer la respuesta que te daremos en breve. Nos Vemos!
+    </p>
+    <button class="btn-primary" onclick="cerrarExito()">Cerrar</button>
   </div>
 </div>
 

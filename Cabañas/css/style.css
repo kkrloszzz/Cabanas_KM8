@@ -1154,3 +1154,123 @@ footer {
 .reserva-actions .btn-ghost {
   flex: 1; text-align: center;
 }
+
+.reserva-exito {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.reserva-exito.active { display: flex; }
+
+.reserva-exito {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.reserva-exito.active { display: flex; }
+.reserva-exito-modal {
+  background: var(--white);
+  max-width: 460px;
+  width: 90%;
+  padding: 3rem;
+  text-align: center;
+  position: relative;
+  z-index: 10000;
+}
+
+@media (max-width: 768px) {
+  .cabana-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .modal-reglamento {
+    font-size: 0.55rem;
+    white-space: nowrap;
+  }
+
+  .cabana-price {
+    font-size: 1.2rem;
+  }
+}
+
+.politicas-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.politicas-overlay.active { display: flex; }
+.politicas-modal {
+  background: var(--white);
+  max-width: 560px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 3rem;
+  position: relative;
+}
+.politicas-body { margin-top: 1.5rem; }
+.politicas-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; line-height: 1.7;
+  color: var(--gray-dark); margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 0.5px solid var(--gray-light);
+}
+.politicas-body h4 {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--black);
+  margin: 1.5rem 0 0.8rem;
+}
+.politicas-body p {
+  font-size: 0.85rem; line-height: 1.7;
+  color: var(--gray-dark); margin-bottom: 0.8rem;
+}
+.politicas-body ul {
+  list-style: none; display: flex; flex-direction: column; gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.politicas-body ul li {
+  font-size: 0.85rem; color: var(--gray-dark);
+  padding-left: 1rem; position: relative; line-height: 1.6;
+}
+.politicas-body ul li::before {
+  content: '→'; position: absolute; left: 0;
+  color: var(--gray-mid);
+}
+.politicas-check {
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  margin-bottom: 1.2rem; padding: 1rem;
+  background: var(--gray-light);
+  border-left: 3px solid var(--gray-mid);
+}
+.politicas-check input[type="checkbox"] {
+  width: 18px; height: 18px; margin-top: 2px;
+  flex-shrink: 0; cursor: pointer;
+  accent-color: var(--black);
+}
+.politicas-check label {
+  font-size: 0.8rem; line-height: 1.6;
+  color: var(--gray-dark); cursor: pointer;
+  text-transform: none; letter-spacing: 0;
+}
+.politicas-check label a {
+  color: var(--black); font-weight: 600;
+  text-decoration: underline;
+}
+.form-submit:disabled {
+  opacity: 0.4; cursor: not-allowed;
+}
