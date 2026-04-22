@@ -270,34 +270,6 @@ function cerrarModal() {
   document.body.style.overflow = '';
 }
 
-function enviarReserva() {
-  const nombre = document.getElementById('nombre').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const telefono = document.getElementById('telefono').value.trim();
-  const checkin = document.getElementById('checkin').value;
-  const checkout = document.getElementById('checkout').value;
-  const cabana = document.getElementById('cabana-select').value;
-  const mensaje = document.getElementById('mensaje').value.trim();
-
-  if (!nombre || !email || !telefono || !checkin || !checkout || !cabana) {
-    alert('Por favor completa todos los campos obligatorios.');
-    return;
-  }
-
-  const resumen = `
-✅ Solicitud de Reserva
-
-👤 Nombre: ${nombre}
-📧 Email: ${email}
-📞 Teléfono: ${telefono}
-🏡 Cabaña: ${cabana}
-📅 Check-in: ${checkin}
-📅 Check-out: ${checkout}
-${mensaje ? '💬 Mensaje: ' + mensaje : ''}
-  `.trim();
-
-  alert(resumen);
-}
 
 
 document.addEventListener('keydown', e => {
