@@ -401,15 +401,15 @@
         <label>Mensaje (opcional)</label>
         <textarea id="mensaje" placeholder="Cuéntanos algo más sobre tu visita..."></textarea>
       </div>
-      <div id="form-error" style="display:none; background:#fef2f2; border-left:3px solid #c0392b; padding:0.8rem 1rem; margin-bottom:1rem; font-size:0.8rem; color:#c0392b;">
-        ⚠️ Por favor completa todos los campos obligatorios antes de continuar.
+      <div id="form-error" class="form-error">
+        Por favor completa todos los campos obligatorios antes de continuar!
       </div>
       <div class="politicas-check">
   <input type="checkbox" id="acepta-politicas" onchange="toggleBotonReserva()">
   <label for="acepta-politicas">He leído y acepto las <a href="#" onclick="abrirPoliticas(); return false;">políticas de reserva y cancelación</a></label>
 </div>
-<div id="form-error" style="display:none; background:#fef2f2; border-left:3px solid #c0392b; padding:0.8rem 1rem; margin-bottom:1rem; font-size:0.8rem; color:#c0392b;">
-  ⚠️ Por favor completa todos los campos obligatorios antes de continuar.
+<div id="form-error" class="form-error">
+  Por favor completa todos los campos obligatorios antes de continuar!
 </div>
 <button class="form-submit" id="btn-enviar" onclick="enviarReserva()" disabled>Enviar Solicitud de Reserva</button>
     </div>

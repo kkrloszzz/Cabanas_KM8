@@ -169,7 +169,7 @@ const cabanas = {
     tag: '1–4 personas · Pequeña',
     titulo: 'Cabaña Conguillio',
     desc: '💆‍♂️Un lugar con un gran ambiente natural para disfrutar.\nCuenta con tinaja privada y vistas al bosque.\n Perfecta para desconectarse. \n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink',
-    features: ['🛁 Tinaja privada', '🔥 Calefacción', '🍳 Cocina equipada', '🐾 Pet Friendly'],
+    features: ['🛁 Tinaja privada', '🔥 Calefacción', '🍳 Cocina equipada', '🛋️ Sala de estar amplia','🐾 Pet Friendly'],
     reglamento: '../assets/NORMAS.pdf',
     precio: '$100.000 <span>/ noche</span>',
     imagenes: [
@@ -191,7 +191,7 @@ const cabanas = {
     tag: '4–6 personas · Mediana',
     titulo: 'Cabaña Malleco',
     desc: '🌼Un oasis idílico. El cantero de rosas blancas y el cercado de troncos lo convierten en un rincón romántico.\n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
-    features: ['🛁 Jacuzzi exterior', '🛏 2 dormitorios', '🍳 Cocina completa', '🌳 Bosque nativo', '🐾 Pet Friendly'],
+    features: ['🛁 Tinaja exterior', '🛏 2 dormitorios', '🍳 Cocina completa', '🌳Área Verde completa', '🐾 Pet Friendly'],
     reglamento: '../assets/NORMAS.pdf',
     precio: '$80.000 <span>/ noche</span>',
     imagenes: [
@@ -209,7 +209,7 @@ const cabanas = {
     tag: '2 personas · Premium',
     titulo: 'Cabaña Icalma',
     desc: '🌲Moderna, rústica y acogedora. Con su fachada de madera oscura y terraza, un refugio perfecto con estilo. \n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
-    features: ['🛁 Bañera con vista al lago', '🧖 Sauna privado', '☕ Desayuno incluido', '🌅 Vista panorámica'],
+    features: ['🛁 Tinaja Privada', '🔥 Calefacción', '🚽Baño con Ducha', '🧑‍🤝‍🧑Habitacion Matrimonial', '🛏 Habitacion 2 camas', '🐾 Pet Friendly'],
     reglamento: '../assets/NORMAS.pdf',
     precio: '$80.000 <span>/ noche</span>',
     imagenes: [
@@ -304,14 +304,14 @@ function enviarReserva() {
   const checkin = document.getElementById('checkin').value;
   const checkout = document.getElementById('checkout').value;
   const cabana = document.getElementById('cabana-select').value;
-  const patente = document.getElementById('patente').value.trim();
+  let patente = document.getElementById('patente').value.trim(); 
   const personas = document.getElementById('resumen-texto').textContent;
   const mensaje = document.getElementById('mensaje').value.trim();
   const mascotas = document.getElementById('mascotas-check').checked
     ? `Sí, ${document.getElementById('num-mascotas').textContent}`
     : 'No';
 
-  if (!nombre || !email || !telefono || !checkin || !checkout || !cabana || !patente) {
+    if (!nombre || !email || !telefono || !checkin || !checkout || !cabana) {
     const err = document.getElementById('form-error');
     err.style.display = 'block';
     err.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -320,10 +320,22 @@ function enviarReserva() {
 
   if(nombre.length<3){
     const err = document.getElementById('form-error');
-    err.textContent = 'La cantidad mínima de caracteres es de 3.';
+    err.textContent = 'La cantidad mínima de caracteres del Nombre es de 3.';
     err.style.display = 'block';
     err.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
+  }
+
+  if(patente.length < 8){
+    const err = document.getElementById('form-error');
+    err.textContent = 'La patente debe tener al menos 6 caracteres).';
+    err.style.display = 'block';
+    err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  if(!patente){
+    patente = 'No indicada';
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
