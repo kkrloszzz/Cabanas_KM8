@@ -168,8 +168,8 @@ const cabanas = {
   conguillio: {
     tag: '4–6 personas · Grande',
     titulo: 'Cabaña Conguillio',
-    desc: '💆‍♂️Un lugar con un gran ambiente natural para disfrutar.\nCuenta con tinaja privada y vistas al bosque.\n Perfecta para desconectarse. \n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink',
-    features: ['🛁 Tinaja privada', '🔥 Calefacción', '🍳 Cocina equipada', '🛋️ Sala de estar amplia','🐾 Pet Friendly'],
+    desc: '• Un lugar con un gran ambiente natural para disfrutar.\nCuenta con tinaja privada y vistas al bosque.\n Perfecta para desconectarse. \n \n• Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n• Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink',
+    features: ['Tinaja privada', 'Calefacción', 'Cocina equipada', 'Sala de estar amplia','Pet Friendly'],
     reglamento: '../assets/NORMAS.pdf',
     precio: '$100.000 <span>/ noche</span>',
     imagenes: [
@@ -190,8 +190,8 @@ const cabanas = {
   malleco: {
     tag: '1–4 personas · Media',
     titulo: 'Cabaña Malleco',
-    desc: '🌼Un oasis idílico. El cantero de rosas blancas y el cercado de troncos lo convierten en un rincón romántico.\n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
-    features: ['🛁 Tinaja exterior', '🛏 2 dormitorios', '🍳 Cocina completa', '🌳Área Verde completa', '🐾 Pet Friendly'],
+    desc: '• Un oasis idílico. El cantero de rosas blancas y el cercado de troncos lo convierten en un rincón romántico.\n \n• Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n• Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
+    features: ['Tinaja exterior', '2 dormitorios', 'Cocina completa', 'Área Verde completa', 'Pet Friendly'],
     reglamento: '../assets/NORMAS.pdf',
     precio: '$80.000 <span>/ noche</span>',
     imagenes: [
@@ -208,8 +208,8 @@ const cabanas = {
   icalma: {
     tag: '1–4 personas · Media',
     titulo: 'Cabaña Icalma',
-    desc: '🌲Moderna, rústica y acogedora. Con su fachada de madera oscura y terraza, un refugio perfecto con estilo. \n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
-    features: ['🛁 Tinaja Privada', '🔥 Calefacción', '🚽Baño con Ducha', '🧑‍🤝‍🧑Habitacion Matrimonial', '🛏 Habitacion 2 camas', '🐾 Pet Friendly'],
+    desc: '• Moderna, rústica y acogedora. Con su fachada de madera oscura y terraza, un refugio perfecto con estilo. \n \n• Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n• Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
+    features: ['Tinaja Privada', 'Calefacción', 'Baño con Ducha', 'Habitacion Matrimonial', 'Habitacion 2 camas', 'Pet Friendly'],
     reglamento: '../assets/NORMAS.pdf',
     precio: '$80.000 <span>/ noche</span>',
     imagenes: [
@@ -328,7 +328,7 @@ function enviarReserva() {
 
   if(patente.length < 8){
     const err = document.getElementById('form-error');
-    err.textContent = 'La patente debe tener al menos 6 caracteres).';
+    err.textContent = 'La patente debe tener al menos 6 caracteres.';
     err.style.display = 'block';
     err.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
