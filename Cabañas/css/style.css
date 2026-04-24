@@ -57,12 +57,12 @@ nav {
 }
 .hero-left {
   display: flex; flex-direction: column; justify-content: center;
-  padding: 6rem 4rem 6rem 6rem;
+  padding: 1rem 4rem 4rem 6rem;
   background: var(--white);
 }
 .hero-tag {
   font-size: 0.65rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--gray-mid); margin-bottom: 2rem;
+  color: #555; margin-bottom: 2rem;
   display: flex; align-items: center; gap: 1rem;
 }
 .hero-tag::before {
@@ -79,7 +79,7 @@ nav {
   font-size: 1.1rem;
   font-weight: 300;
   line-height: 1.6;
-  color: var(--gray-dark);
+  color: #000000;
   max-width: 400px;
   margin-bottom: 2rem;
 }
@@ -166,14 +166,32 @@ nav {
 
 /* ── STRIP ── */
 .strip {
-  background: var(--black); color: var(--white);
-  display: flex; align-items: center; justify-content: center;
-  gap: 4rem; padding: 1.2rem 4rem; overflow-x: auto;
+  background: var(--black);
+  color: var(--white);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 1.2rem 0;
 }
+
+.strip-track {
+  display: inline-flex;
+  gap: 4rem;
+  animation: marquee 25s linear infinite;
+}
+
+.strip:hover .strip-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 .strip-item {
   font-size: 0.6rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--gray-mid); white-space: nowrap;
-  display: flex; align-items: center; gap: 1rem;
+  color: var(--gray-mid); white-space: nowrap; 
+  display: inline-flex; align-items: center; gap: 1rem;
 }
 .strip-dot { width: 4px; height: 4px; background: var(--gray-mid); border-radius: 50%; }
 
@@ -260,9 +278,36 @@ nav {
   font-family: 'Playfair Display', serif;
   font-size: 2.2rem; font-weight: 700; color: var(--black); display: block;
 }
+
+.title-certi{
+  margin-top: 4rem;
+  font-size: 1.8rem;
+  font-family: 'Playfair Display';
+}
+
+.certi-stats {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; background: var(--gray-light); margin-top: 2.5rem;
+  border: 1px solid var(--gray-light);
+}
+
+.logo-sernatur {
+  width: 150px;
+}
+
+.logo-arriendosCH {
+  width: 170px;
+}
+
+
 .stat-desc {
   font-size: 0.6rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--gray-mid); margin-top: 0.3rem; display: block;
+  color: #1e1e1e; margin-top: 0.3rem; display: block;
+}
+
+.sernatur-desc {
+  font-size: 0.6rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: #1e1e1e; margin-top: 2.3rem; display: block;
 }
 
 /* ── CABAÑAS ── */
@@ -293,7 +338,7 @@ nav {
 .cabana-info { padding: 1.5rem; }
 .cabana-tag {
   font-size: 0.55rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--gray-mid); margin-bottom: 0.5rem;
+  color: #000000; margin-bottom: 0.5rem;
 }
 .cabana-name {
   font-family: 'Playfair Display', serif;
@@ -385,8 +430,9 @@ nav {
   padding-bottom: 1rem; border-bottom: 0.5px solid var(--gray-light);
 }
 .location-icon {
-  width: 36px; height: 36px; background: var(--gray-light);
-  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; background:#ffffff;
+  display: flex; align-items: center; justify-content: center; 
+  mix-blend-mode: multiply;
   font-size: 0.9rem; flex-shrink: 0;
 }
 .location-item-text strong {
@@ -618,8 +664,11 @@ footer {
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
-  .hero { grid-template-columns: 1fr; }
-  .hero-right { min-height: 350px; }
+  .hero { 
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+  .hero-right { min-height: 350px; max-height: 350px; overflow: hidden; }
   .hero-left { padding: 4rem 2rem; }
   .section { padding: 5rem 2rem; }
   .about-grid, .location-grid, .contact-grid { grid-template-columns: 1fr; }
@@ -627,7 +676,12 @@ footer {
   .social-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   footer { padding: 3rem 2rem 2rem; }
-  .strip { gap: 2rem; }
+  .strip { 
+    padding: 0.6rem 0;
+    position: relative;
+    z-index: 2;
+  }
+  .strip-item { font-size: 0.55rem; }
 }
 
 .hero-logo {
@@ -1225,8 +1279,8 @@ footer {
 .politicas-body { margin-top: 1.5rem; }
 .politicas-intro {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem; line-height: 1.7;
-  color: var(--gray-dark); margin-bottom: 1.5rem;
+  font-size: 4rem; line-height: 4;
+  color: #000000; margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 0.5px solid var(--gray-light);
 }

@@ -45,17 +45,32 @@
 </section>
 
 <div class="strip">
-  <span class="strip-item">🛁 Tinajas privadas</span>
-  <span class="strip-dot"></span>
-  <span class="strip-item">🌳 Áreas verdes</span>
-  <span class="strip-dot"></span>
-  <span class="strip-item">⭐ Garantía de calidad</span>
-  <span class="strip-dot"></span>
-  <span class="strip-item">🐾 Pet Friendly</span>
-  <span class="strip-dot"></span>
-  <span class="strip-item">🏡 Full equipadas</span>
-  <span class="strip-dot"></span>
-  <span class="strip-item">🏆 Superanfitriones en Airbnb</span>
+  <div class="strip-track">
+    <span class="strip-item">🛁 Tinajas privadas</span>
+    <span class="strip-dot"></span>
+    <span class="strip-item">🌳 Áreas verdes</span>
+    <span class="strip-dot"></span>
+    <span class="strip-item">⭐ Garantía de calidad</span>
+    <span class="strip-dot"></span>
+    <span class="strip-item">🐾 Pet Friendly</span>
+    <span class="strip-dot"></span>
+    <span class="strip-item">🏡 Full equipadas</span>
+    <span class="strip-dot"></span>
+    <span class="strip-item">🏆 Superanfitriones en Airbnb</span>
+    <span class="strip-dot"></span>
+    <span class="strip-item">🛁 Tinajas privadas</span>
+    <span class="strip-dot"></span>
+    <span class="strip-item">🌳 Áreas verdes</span>
+    <span class="strip-dot"></span>
+    <span class="strip-item">⭐ Garantía de calidad</span>
+    <span class="strip-dot"></span>
+    <span class="strip-item">🐾 Pet Friendly</span>
+    <span class="strip-dot"></span>
+    <span class="strip-item">🏡 Full equipadas</span>
+    <span class="strip-dot"></span>
+    <span class="strip-item">🏆 Superanfitriones en Airbnb</span>
+    <span class="strip-dot"></span>
+  </div>
 </div>
 
 
@@ -83,6 +98,17 @@
         <div class="stat-box">
           <span class="stat-num">4.9</span>
           <span class="stat-desc">Calificación</span>
+        </div>
+      </div>
+      <h5 class="title-certi">Certificados por:</h5>
+      <div class="certi-stats">
+        <div class="stat-box">
+          <img src="../assets/Logo-Sernatur.jpg" alt="Sernatour" class="logo-sernatur">
+          <span class="sernatur-desc">Sernatur</span>
+        </div>
+        <div class="stat-box">
+          <img src="../assets/arriendoCertificado.jpg" alt="Arriendos Certificados" class="logo-arriendosCH">
+          <span class="stat-desc">Arriendos Certificados Chile</span>
         </div>
       </div>
     </div>
@@ -241,7 +267,7 @@
   <h2 class="section-title" style="margin-bottom: 3rem;">Vívelo antes de <em>llegar</em></h2>
 
   <div class="gallery-container">
-    <button class="gallery-arrow gallery-arrow-left" onclick="moverGaleria(-1)">&#8592;</button>
+    <button class="gallery-arrow gallery-arrow-left" onclick="moverGaleria(-1)"><</button>
 
     <div class="social-grid" id="galeria">
       <div class="social-post" onclick="abrirLightbox(0)">
@@ -258,7 +284,7 @@
       </div>
     </div>
 
-    <button class="gallery-arrow gallery-arrow-right" onclick="moverGaleria(1)">&#8594;</button>
+    <button class="gallery-arrow gallery-arrow-right" onclick="moverGaleria(1)">></button>
   </div>
 
   
@@ -405,8 +431,9 @@
         Por favor completa todos los campos obligatorios antes de continuar!
       </div>
       <div class="politicas-check">
-  <input type="checkbox" id="acepta-politicas" onchange="toggleBotonReserva()">
-  <label for="acepta-politicas">He leído y acepto las <a href="#" onclick="abrirPoliticas(); return false;">políticas de reserva y cancelación</a></label>
+  <label>Para continuar, debes leer las 
+    <a href="#" onclick="abrirPoliticas(); return false;">políticas de reserva y cancelación</a>
+  </label>
 </div>
 <div id="form-error" class="form-error">
   Por favor completa todos los campos obligatorios antes de continuar!
@@ -518,7 +545,7 @@
   <div class="reserva-exito-modal">
     <span class="reserva-exito-icon">✓</span>
     <p class="reserva-label">Solicitud enviada</p>
-    <h3 class="reserva-titulo">¡Recibimos tu reserva,<br><em>te contactaremos pronto!</em></h3>
+    <h3 class="reserva-titulo">¡Recibimos tu solicitud,<br><em>te contactaremos pronto!</em></h3>
     <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--gray-dark); margin-bottom:2rem;">
       Mantente atento a tu correo para conocer la respuesta que te daremos en breve. Nos Vemos!
     </p>

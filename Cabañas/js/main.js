@@ -44,7 +44,7 @@ function actualizarPersonas() {
   document.getElementById('personas-hidden').value = partes.join(', ');
 }
 
-// ── GALERÍA ──
+// GALERÍA 
 const todasLasImagenes = [
   '../assets/interior.jpg',
   '../assets/tinaja.jpeg',
@@ -166,7 +166,7 @@ function cambiarMascotas(delta) {
 
 const cabanas = {
   conguillio: {
-    tag: '1–4 personas · Pequeña',
+    tag: '4–6 personas · Grande',
     titulo: 'Cabaña Conguillio',
     desc: '💆‍♂️Un lugar con un gran ambiente natural para disfrutar.\nCuenta con tinaja privada y vistas al bosque.\n Perfecta para desconectarse. \n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink',
     features: ['🛁 Tinaja privada', '🔥 Calefacción', '🍳 Cocina equipada', '🛋️ Sala de estar amplia','🐾 Pet Friendly'],
@@ -188,7 +188,7 @@ const cabanas = {
     ]
   },
   malleco: {
-    tag: '4–6 personas · Mediana',
+    tag: '1–4 personas · Media',
     titulo: 'Cabaña Malleco',
     desc: '🌼Un oasis idílico. El cantero de rosas blancas y el cercado de troncos lo convierten en un rincón romántico.\n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
     features: ['🛁 Tinaja exterior', '🛏 2 dormitorios', '🍳 Cocina completa', '🌳Área Verde completa', '🐾 Pet Friendly'],
@@ -206,7 +206,7 @@ const cabanas = {
     ]
   },
   icalma: {
-    tag: '2 personas · Premium',
+    tag: '1–4 personas · Media',
     titulo: 'Cabaña Icalma',
     desc: '🌲Moderna, rústica y acogedora. Con su fachada de madera oscura y terraza, un refugio perfecto con estilo. \n \n♨️ Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n🛏️Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
     features: ['🛁 Tinaja Privada', '🔥 Calefacción', '🚽Baño con Ducha', '🧑‍🤝‍🧑Habitacion Matrimonial', '🛏 Habitacion 2 camas', '🐾 Pet Friendly'],
@@ -308,7 +308,7 @@ function enviarReserva() {
   const personas = document.getElementById('resumen-texto').textContent;
   const mensaje = document.getElementById('mensaje').value.trim();
   const mascotas = document.getElementById('mascotas-check').checked
-    ? `Sí, ${document.getElementById('num-mascotas').textContent}`
+    ? `${document.getElementById('num-mascotas').textContent}`
     : 'No';
 
     if (!nombre || !email || !telefono || !checkin || !checkout || !cabana) {
@@ -404,7 +404,7 @@ function confirmarReserva() {
     patente:  document.getElementById('patente').value.trim() || 'No indicada',
     personas: document.getElementById('resumen-texto').textContent,
     mascotas: document.getElementById('mascotas-check').checked
-      ? `Sí, ${document.getElementById('num-mascotas').textContent}`
+      ? `${document.getElementById('num-mascotas').textContent}`
       : 'No',
     mensaje:  document.getElementById('mensaje').value.trim() || 'Sin mensaje'
   };
@@ -435,15 +435,17 @@ function cerrarExito() {
 
 function abrirPoliticas() {
   document.getElementById('politicas-overlay').classList.add('active');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden'; 
 }
 
 function cerrarPoliticas() {
   document.getElementById('politicas-overlay').classList.remove('active');
   document.body.style.overflow = '';
-}
+  
+  const btn = document.getElementById('btn-enviar');
+  btn.disabled = false;
 
-function toggleBotonReserva() {
-  const acepta = document.getElementById('acepta-politicas').checked;
-  document.getElementById('btn-enviar').disabled = !acepta;
+  setTimeout(() => {
+    btn.disabled = true;
+  }, 5000); 
 }
