@@ -344,7 +344,7 @@ function actualizarCarrusel(dir) {
     ` : ''}
   `;
 
-  // Animar entrada si hay dirección
+  
   if (dir !== undefined) {
     const el = media.querySelector('img, video');
     if (el) {
@@ -352,7 +352,7 @@ function actualizarCarrusel(dir) {
       el.style.transition = 'none';
       el.style.transform = `translateX(${entrada})`;
       el.style.opacity = '0';
-      el.offsetHeight; // forzar reflow
+      el.offsetHeight; 
       el.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
       el.style.transform = 'translateX(0)';
       el.style.opacity = '1';
@@ -400,8 +400,8 @@ function irASlide(i, dir) {
   }
 }
 
-// Funciones internas: solo cierran la UI, sin tocar el historial
-// (las llama el listener de popstate)
+
+
 function _cerrarModalSinHistorial() {
   document.getElementById('modal-overlay').classList.remove('active');
   document.body.style.overflow = '';
@@ -429,8 +429,8 @@ function _cerrarExitoSinHistorial() {
   modalActivo = null;
 }
 
-// Funciones públicas: cierran UI + retroceden en el historial
-// (las llaman los botones ✕ y overlays)
+
+
 function cerrarModal() {
   if (!document.getElementById('modal-overlay').classList.contains('active')) return;
   _cerrarModalSinHistorial();
