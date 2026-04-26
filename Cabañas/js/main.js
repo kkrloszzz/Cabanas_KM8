@@ -50,7 +50,6 @@ const todasLasImagenes = [
   '../assets/tinaja.jpeg',
   '../assets/cabana1.jpg',
   '../assets/cabanas.png',
-  '../assets/cabana2.jpg',
   '../assets/pieza1.jpeg',
   '../assets/piezamatrimonial.jpg',
   '../assets/otono.png'
