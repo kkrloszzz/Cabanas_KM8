@@ -394,6 +394,7 @@ nav {
   display: none; position: fixed; inset: 0;
   background: rgba(0,0,0,0.92); z-index: 9999;
   align-items: center; justify-content: center;
+  overflow: hidden;
 }
 .lightbox.active { display: flex; }
 .lightbox-img { max-width: 90vw; max-height: 90vh; object-fit: contain; display: block; }
@@ -560,7 +561,8 @@ footer { background: var(--black); color: var(--white); padding: 5rem 6rem 3rem;
 .modal-media {
   width: 100%; height: 100%; min-height: 800px;
   overflow: hidden; position: relative;
-  background: var(--black);
+  background: var(--black); 
+  overflow: hidden;
 }
 .modal-media img, .modal-media video {
   position: absolute; inset: 0;
@@ -874,5 +876,32 @@ footer { background: var(--black); color: var(--white); padding: 5rem 6rem 3rem;
     flex: 0 0 75vw; min-height: unset;
     aspect-ratio: 4 / 3; scroll-snap-align: center; border-radius: 6px;
   }
+  .gallery-arrow { display: none; }
 
+  .social-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 10px;
+    padding: 0 1.5rem 1rem;
+    background: transparent;
+    width: 100%;
+  }
+
+  .social-post {
+    flex: 0 0 75vw;
+    min-height: unset;
+    aspect-ratio: 4 / 3;
+    scroll-snap-align: center;
+    border-radius: 6px;
+  }
+  
 }
+
+
+#lightbox-img {
+  will-change: transform, opacity;
+}
+

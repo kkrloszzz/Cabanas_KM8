@@ -81,26 +81,70 @@ function abrirLightbox(idx) {
   document.getElementById('lightbox-img').src = todasLasImagenes[idx];
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
+  abrirModalHistorial('lightbox');
 }
 
 function cerrarLightbox() {
+  if (!document.getElementById('lightbox').classList.contains('active')) return;
   document.getElementById('lightbox').classList.remove('active');
   document.body.style.overflow = '';
+  modalActivo = null;
+  history.back();
 }
 
 function cambiarLightbox(dir) {
-  lightboxIndex = (lightboxIndex + dir + todasLasImagenes.length) % todasLasImagenes.length;
-  document.getElementById('lightbox-img').src = todasLasImagenes[lightboxIndex];
+  const img = document.getElementById('lightbox-img');
+  const salida = dir > 0 ? '-100%' : '100%';
+  const entrada = dir > 0 ? '100%' : '-100%';
+
+  
+  img.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+  img.style.transform = `translateX(${salida})`;
+  img.style.opacity = '0';
+
+  setTimeout(() => {
+    
+    lightboxIndex = (lightboxIndex + dir + todasLasImagenes.length) % todasLasImagenes.length;
+    img.src = todasLasImagenes[lightboxIndex];
+    img.style.transition = 'none';
+    img.style.transform = `translateX(${entrada})`;
+    img.style.opacity = '0';
+
+    
+    img.offsetHeight;
+
+    
+    img.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+    img.style.transform = 'translateX(0)';
+    img.style.opacity = '1';
+  }, 250);
 }
+
+// ── SWIPE EN LIGHTBOX ──
+(function() {
+  let startX = 0;
+  document.addEventListener('DOMContentLoaded', function() {
+    const lb = document.getElementById('lightbox');
+
+    lb.addEventListener('touchstart', function(e) {
+      startX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lb.addEventListener('touchend', function(e) {
+      const diff = startX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) {
+        cambiarLightbox(diff > 0 ? 1 : -1);
+      }
+    }, { passive: true });
+  });
+})();
 
 // ── DOM LISTO ──
 document.addEventListener('DOMContentLoaded', function() {
 
-  // Personas
   actualizarPersonas();
 
-
-   const hoy = new Date().toISOString().split('T')[0];
+  const hoy = new Date().toISOString().split('T')[0];
   document.getElementById('checkin').min = hoy;
   document.getElementById('checkout').min = hoy;
 
@@ -111,7 +155,6 @@ document.addEventListener('DOMContentLoaded', function() {
       checkout.value = '';
     }
   });
-
 
   // Patente
   document.getElementById('patente').addEventListener('keyup', function() {
@@ -143,27 +186,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 3000);
   }
 
+  // Swipe en modal
+  const modalMedia = document.getElementById('modal-media');
+  let touchStartX = 0;
+
+  modalMedia.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  modalMedia.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) {
+      moverCarrusel(diff > 0 ? 1 : -1);
+    }
+  }, { passive: true });
+
+  history.replaceState({ modal: null }, '');
+
+  if (window.innerWidth <= 768) {
+  const galeria = document.getElementById('galeria');
+  galeria.innerHTML = todasLasImagenes.map((src, i) => `
+    <div class="social-post" onclick="abrirLightbox(${i})">
+      <img src="${src}" alt="foto ${i+1}">
+    </div>
+  `).join('');
+}
 });
 
-// Mascotas
-let numMascotas = 1;
+// ── HISTORY API ──
+let modalActivo = null;
 
-function toggleMascotas() {
-  const checked = document.getElementById('mascotas-check').checked;
-  const counter = document.getElementById('mascotas-counter');
-  const label = document.getElementById('mascotas-label');
-  counter.classList.toggle('visible', checked);
-  label.textContent = checked ? 'Sí' : 'No';
+function abrirModalHistorial(id) {
+  modalActivo = id;
+  history.pushState({ modal: id }, '');
 }
 
-function cambiarMascotas(delta) {
-  numMascotas = Math.max(1, Math.min(6, numMascotas + delta));
-  document.getElementById('num-mascotas').textContent = numMascotas;
-  document.getElementById('btn-m-menos').disabled = numMascotas <= 1;
-  document.getElementById('btn-m-mas').disabled = numMascotas >= 6;
-}
+window.addEventListener('popstate', function() {
+  if (modalActivo === 'modal-overlay')     _cerrarModalSinHistorial();
+  else if (modalActivo === 'reserva-overlay')   _cerrarReservaSinHistorial();
+  else if (modalActivo === 'politicas-overlay')  _cerrarPoliticasSinHistorial();
+  else if (modalActivo === 'reserva-exito')      _cerrarExitoSinHistorial();
+  else if (modalActivo === 'lightbox') {          
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+    modalActivo = null;
+  }
+});
 
-
+// ── CABAÑAS ──
 const cabanas = {
   conguillio: {
     tag: '4–6 personas · Grande',
@@ -248,29 +318,10 @@ function abrirModal(id) {
   actualizarCarrusel();
   document.getElementById('modal-overlay').classList.add('active');
   document.body.style.overflow = 'hidden';
+  abrirModalHistorial('modal-overlay');
 }
 
-// ── SWIPE EN MODAL ──
-let touchStartX = 0;
-let touchEndX = 0;
-
-document.addEventListener('DOMContentLoaded', function() {
-  const modalMedia = document.getElementById('modal-media');
-  
-  modalMedia.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-
-  modalMedia.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 50) { // mínimo 50px de swipe
-      moverCarrusel(diff > 0 ? 1 : -1);
-    }
-  }, { passive: true });
-});
-
-function actualizarCarrusel() {
+function actualizarCarrusel(dir) {
   const media = document.getElementById('modal-media');
   const total = carruselImagenes.length;
   const src = carruselImagenes[carruselIndex];
@@ -287,29 +338,122 @@ function actualizarCarrusel() {
       <button class="modal-carr-btn modal-carr-next" onclick="moverCarrusel(1)">&#8594;</button>
       <div class="modal-carr-dots">
         ${carruselImagenes.map((_, i) => `
-          <span class="modal-carr-dot ${i === carruselIndex ? 'active' : ''}" onclick="irASlide(${i})"></span>
+          <span class="modal-carr-dot ${i === carruselIndex ? 'active' : ''}" onclick="irASlide(${i}, 1)"></span>
         `).join('')}
       </div>
     ` : ''}
   `;
+
+  // Animar entrada si hay dirección
+  if (dir !== undefined) {
+    const el = media.querySelector('img, video');
+    if (el) {
+      const entrada = dir > 0 ? '100%' : '-100%';
+      el.style.transition = 'none';
+      el.style.transform = `translateX(${entrada})`;
+      el.style.opacity = '0';
+      el.offsetHeight; // forzar reflow
+      el.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+      el.style.transform = 'translateX(0)';
+      el.style.opacity = '1';
+    }
+  }
 }
 
 function moverCarrusel(dir) {
-  carruselIndex = (carruselIndex + dir + carruselImagenes.length) % carruselImagenes.length;
-  actualizarCarrusel();
+  const media = document.getElementById('modal-media');
+  const el = media.querySelector('img, video');
+
+  if (el) {
+    const salida = dir > 0 ? '-100%' : '100%';
+    el.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+    el.style.transform = `translateX(${salida})`;
+    el.style.opacity = '0';
+
+    setTimeout(() => {
+      carruselIndex = (carruselIndex + dir + carruselImagenes.length) % carruselImagenes.length;
+      actualizarCarrusel(dir);
+    }, 250);
+  } else {
+    carruselIndex = (carruselIndex + dir + carruselImagenes.length) % carruselImagenes.length;
+    actualizarCarrusel(dir);
+  }
 }
 
-function irASlide(i) {
-  carruselIndex = i;
-  actualizarCarrusel();
+function irASlide(i, dir) {
+  const d = dir !== undefined ? dir : (i > carruselIndex ? 1 : -1);
+  const media = document.getElementById('modal-media');
+  const el = media.querySelector('img, video');
+
+  if (el) {
+    const salida = d > 0 ? '-100%' : '100%';
+    el.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+    el.style.transform = `translateX(${salida})`;
+    el.style.opacity = '0';
+    setTimeout(() => {
+      carruselIndex = i;
+      actualizarCarrusel(d);
+    }, 250);
+  } else {
+    carruselIndex = i;
+    actualizarCarrusel(d);
+  }
 }
 
-function cerrarModal() {
+// Funciones internas: solo cierran la UI, sin tocar el historial
+// (las llama el listener de popstate)
+function _cerrarModalSinHistorial() {
   document.getElementById('modal-overlay').classList.remove('active');
   document.body.style.overflow = '';
+  modalActivo = null;
 }
 
+function _cerrarReservaSinHistorial() {
+  document.getElementById('reserva-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+  modalActivo = null;
+}
 
+function _cerrarPoliticasSinHistorial() {
+  document.getElementById('politicas-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+  modalActivo = null;
+  const btn = document.getElementById('btn-enviar');
+  btn.disabled = false;
+  setTimeout(() => { btn.disabled = true; }, 5000);
+}
+
+function _cerrarExitoSinHistorial() {
+  document.getElementById('reserva-exito').classList.remove('active');
+  document.body.style.overflow = '';
+  modalActivo = null;
+}
+
+// Funciones públicas: cierran UI + retroceden en el historial
+// (las llaman los botones ✕ y overlays)
+function cerrarModal() {
+  if (!document.getElementById('modal-overlay').classList.contains('active')) return;
+  _cerrarModalSinHistorial();
+  history.back();
+}
+
+function cerrarReserva() {
+  if (!document.getElementById('reserva-overlay').classList.contains('active')) return;
+  _cerrarReservaSinHistorial();
+  history.back();
+}
+
+function cerrarPoliticas() {
+  if (!document.getElementById('politicas-overlay').classList.contains('active')) return;
+  _cerrarPoliticasSinHistorial();
+  history.back();
+}
+
+function cerrarExito() {
+  if (!document.getElementById('reserva-exito').classList.contains('active')) return;
+  _cerrarExitoSinHistorial();
+  history.back();
+}
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') cerrarModal();
@@ -331,7 +475,7 @@ function enviarReserva() {
     ? `${document.getElementById('num-mascotas').textContent}`
     : 'No';
 
-    if (!nombre || !email || !telefono || !checkin || !checkout || !cabana) {
+  if (!nombre || !email || !telefono || !checkin || !checkout || !cabana) {
     const err = document.getElementById('form-error');
     err.style.display = 'block';
     err.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -376,7 +520,6 @@ function enviarReserva() {
     return;
   }
 
-
   document.getElementById('form-error').style.display = 'none';
 
   const formatearFecha = (fecha) => {
@@ -408,12 +551,9 @@ function enviarReserva() {
 
   document.getElementById('reserva-overlay').classList.add('active');
   document.body.style.overflow = 'hidden';
+  abrirModalHistorial('reserva-overlay');
 }
 
-function cerrarReserva() {
-  document.getElementById('reserva-overlay').classList.remove('active');
-  document.body.style.overflow = '';
-}
 function confirmarReserva() {
   const btn = document.getElementById('btn-confirmar');
   if (btn.disabled) return;
@@ -440,6 +580,7 @@ function confirmarReserva() {
       cerrarReserva();
       document.getElementById('reserva-exito').classList.add('active');
       document.body.style.overflow = 'hidden';
+      abrirModalHistorial('reserva-exito');
       btn.textContent = 'Enviado ✓';
       setTimeout(() => {
         btn.disabled = false;
@@ -454,24 +595,26 @@ function confirmarReserva() {
     });
 }
 
-function cerrarExito() {
-  document.getElementById('reserva-exito').classList.remove('active');
-  document.body.style.overflow = '';
+// Mascotas
+let numMascotas = 1;
+
+function toggleMascotas() {
+  const checked = document.getElementById('mascotas-check').checked;
+  const counter = document.getElementById('mascotas-counter');
+  const label = document.getElementById('mascotas-label');
+  counter.classList.toggle('visible', checked);
+  label.textContent = checked ? 'Sí' : 'No';
+}
+
+function cambiarMascotas(delta) {
+  numMascotas = Math.max(1, Math.min(6, numMascotas + delta));
+  document.getElementById('num-mascotas').textContent = numMascotas;
+  document.getElementById('btn-m-menos').disabled = numMascotas <= 1;
+  document.getElementById('btn-m-mas').disabled = numMascotas >= 6;
 }
 
 function abrirPoliticas() {
   document.getElementById('politicas-overlay').classList.add('active');
-  document.body.style.overflow = 'hidden'; 
-}
-
-function cerrarPoliticas() {
-  document.getElementById('politicas-overlay').classList.remove('active');
-  document.body.style.overflow = '';
-  
-  const btn = document.getElementById('btn-enviar');
-  btn.disabled = false;
-
-  setTimeout(() => {
-    btn.disabled = true;
-  }, 5000); 
+  document.body.style.overflow = 'hidden';
+  abrirModalHistorial('politicas-overlay');
 }
