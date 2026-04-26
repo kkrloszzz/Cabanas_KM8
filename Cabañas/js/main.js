@@ -250,6 +250,26 @@ function abrirModal(id) {
   document.body.style.overflow = 'hidden';
 }
 
+// ── SWIPE EN MODAL ──
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('DOMContentLoaded', function() {
+  const modalMedia = document.getElementById('modal-media');
+  
+  modalMedia.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  modalMedia.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) { // mínimo 50px de swipe
+      moverCarrusel(diff > 0 ? 1 : -1);
+    }
+  }, { passive: true });
+});
+
 function actualizarCarrusel() {
   const media = document.getElementById('modal-media');
   const total = carruselImagenes.length;
@@ -358,6 +378,12 @@ function enviarReserva() {
 
 
   document.getElementById('form-error').style.display = 'none';
+
+  const formatearFecha = (fecha) => {
+    if (!fecha) return '';
+    const [y, m, d] = fecha.split('-');
+    return `${d}/${m}/${y}`;
+  };
 
   const filas = [
     { label: 'Nombre', valor: nombre },
