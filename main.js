@@ -557,7 +557,7 @@ function confirmarReserva() {
 
   emailjs.send('service_aqa7mtr', 'template_j2t9bg4', params)
     .then(() => {
-      cerrarReserva();
+      _cerrarReservaSinHistorial(); 
       document.getElementById('reserva-exito').classList.add('active');
       document.body.style.overflow = 'hidden';
       abrirModalHistorial('reserva-exito');
