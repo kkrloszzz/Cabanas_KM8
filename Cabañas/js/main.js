@@ -574,7 +574,7 @@ function confirmarReserva() {
     mensaje:  document.getElementById('mensaje').value.trim() || 'Sin mensaje'
   };
 
-  emailjs.send('service_gzfdeb9', 'template_beffc3d', params)
+  emailjs.send('service_aqa7mtr', 'template_j2t9bg4', params)
     .then(() => {
       cerrarReserva();
       document.getElementById('reserva-exito').classList.add('active');
