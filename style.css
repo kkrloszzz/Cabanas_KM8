@@ -136,12 +136,15 @@ nav {
   display: block;
   position: relative;
   width: 100%;
+  -webkit-overflow-scrolling: auto; 
+  transform: translateZ(0);  
 }
 .strip-track {
   display: flex;
   gap: 4rem;
   animation: marquee 25s linear infinite;
   will-change: transform;
+  -webkit-transform: translateZ(0);
 }
 .strip:hover .strip-track { animation-play-state: paused; }
 @keyframes marquee {
