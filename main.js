@@ -25,6 +25,7 @@ function cambiarPersonas(tipo, delta) {
   if (tipo === 'adultos') personasCounts.adultos = Math.max(1, personasCounts.adultos);
   actualizarPersonas();
 }
+
 function actualizarPersonas() {
   ['adultos', 'ninos', 'infantes'].forEach(t => {
     document.getElementById('num-' + t).textContent = personasCounts[t];
@@ -44,15 +45,15 @@ function actualizarPersonas() {
   document.getElementById('personas-hidden').value = partes.join(', ');
 }
 
-// GALERÍA 
+// ── GALERÍA ──
 const todasLasImagenes = [
-  '../assets/interior.jpg',
-  '../assets/tinaja.jpeg',
-  '../assets/cabana1.jpg',
-  '../assets/cabanas.png',
-  '../assets/pieza1.jpeg',
-  '../assets/piezamatrimonial.jpg',
-  '../assets/otono.png'
+  'assets/interior.jpg',
+  'assets/tinaja.jpeg',
+  'assets/cabana1.jpg',
+  'assets/cabanas.png',
+  'assets/pieza1.jpeg',
+  'assets/piezamatrimonial.jpg',
+  'assets/otono.png'
 ];
 let paginaGaleria = 0;
 const porPagina = 4;
@@ -96,23 +97,17 @@ function cambiarLightbox(dir) {
   const salida = dir > 0 ? '-100%' : '100%';
   const entrada = dir > 0 ? '100%' : '-100%';
 
-  
   img.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
   img.style.transform = `translateX(${salida})`;
   img.style.opacity = '0';
 
   setTimeout(() => {
-    
     lightboxIndex = (lightboxIndex + dir + todasLasImagenes.length) % todasLasImagenes.length;
     img.src = todasLasImagenes[lightboxIndex];
     img.style.transition = 'none';
     img.style.transform = `translateX(${entrada})`;
     img.style.opacity = '0';
-
-    
     img.offsetHeight;
-
-    
     img.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
     img.style.transform = 'translateX(0)';
     img.style.opacity = '1';
@@ -124,11 +119,9 @@ function cambiarLightbox(dir) {
   let startX = 0;
   document.addEventListener('DOMContentLoaded', function() {
     const lb = document.getElementById('lightbox');
-
     lb.addEventListener('touchstart', function(e) {
       startX = e.changedTouches[0].screenX;
     }, { passive: true });
-
     lb.addEventListener('touchend', function(e) {
       const diff = startX - e.changedTouches[0].screenX;
       if (Math.abs(diff) > 50) {
@@ -169,14 +162,12 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (raw.length > 2) {
       formatted = raw.slice(0, 2) + '-' + raw.slice(2);
     }
-
     this.value = formatted;
   });
 
   // Slider hero
   const heroSlides = document.querySelectorAll('.hero-slide');
   let heroIndex = 0;
-
   if (heroSlides.length > 0) {
     setInterval(function() {
       heroSlides[heroIndex].classList.remove('active');
@@ -188,11 +179,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Swipe en modal
   const modalMedia = document.getElementById('modal-media');
   let touchStartX = 0;
-
   modalMedia.addEventListener('touchstart', e => {
     touchStartX = e.changedTouches[0].screenX;
   }, { passive: true });
-
   modalMedia.addEventListener('touchend', e => {
     const diff = touchStartX - e.changedTouches[0].screenX;
     if (Math.abs(diff) > 50) {
@@ -203,13 +192,13 @@ document.addEventListener('DOMContentLoaded', function() {
   history.replaceState({ modal: null }, '');
 
   if (window.innerWidth <= 768) {
-  const galeria = document.getElementById('galeria');
-  galeria.innerHTML = todasLasImagenes.map((src, i) => `
-    <div class="social-post" onclick="abrirLightbox(${i})">
-      <img src="${src}" alt="foto ${i+1}">
-    </div>
-  `).join('');
-}
+    const galeria = document.getElementById('galeria');
+    galeria.innerHTML = todasLasImagenes.map((src, i) => `
+      <div class="social-post" onclick="abrirLightbox(${i})">
+        <img src="${src}" alt="foto ${i+1}">
+      </div>
+    `).join('');
+  }
 });
 
 // ── HISTORY API ──
@@ -221,11 +210,11 @@ function abrirModalHistorial(id) {
 }
 
 window.addEventListener('popstate', function() {
-  if (modalActivo === 'modal-overlay')     _cerrarModalSinHistorial();
+  if (modalActivo === 'modal-overlay')          _cerrarModalSinHistorial();
   else if (modalActivo === 'reserva-overlay')   _cerrarReservaSinHistorial();
-  else if (modalActivo === 'politicas-overlay')  _cerrarPoliticasSinHistorial();
-  else if (modalActivo === 'reserva-exito')      _cerrarExitoSinHistorial();
-  else if (modalActivo === 'lightbox') {          
+  else if (modalActivo === 'politicas-overlay') _cerrarPoliticasSinHistorial();
+  else if (modalActivo === 'reserva-exito')     _cerrarExitoSinHistorial();
+  else if (modalActivo === 'lightbox') {
     document.getElementById('lightbox').classList.remove('active');
     document.body.style.overflow = '';
     modalActivo = null;
@@ -238,22 +227,22 @@ const cabanas = {
     tag: '4–6 personas · Grande',
     titulo: 'Cabaña Conguillio',
     desc: '• Un lugar con un gran ambiente natural para disfrutar.\nCuenta con tinaja privada y vistas al bosque.\n Perfecta para desconectarse. \n \n• Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n• Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink',
-    features: ['Tinaja privada', 'Calefacción', 'Cocina equipada', 'Sala de estar amplia','Pet Friendly'],
-    reglamento: '../assets/NORMAS.pdf',
+    features: ['Tinaja privada', 'Calefacción', 'Cocina equipada', 'Sala de estar amplia', 'Pet Friendly'],
+    reglamento: 'assets/NORMAS.pdf',
     precio: '$100.000 <span>/ noche</span>',
     imagenes: [
-      '../assets/conguillio/cabana_conguillio.jpeg',
-      '../assets/conguillio/cocina_conguillio.jpeg',
-      '../assets/conguillio/cocina_entera_conguillio.jpeg',
-      '../assets/conguillio/mesas_conguillio.jpeg',
-      '../assets/conguillio/mesas2_conguillio.jpeg',
-      '../assets/conguillio/pieza1_conguillio.jpeg',
-      '../assets/conguillio/pieza2_conguillio.jpeg',
-      '../assets/conguillio/pieza3_conguillio.jpeg',
-      '../assets/conguillio/sala_completa_conguillio.jpeg',
-      '../assets/conguillio/salamandra_conguillio.jpeg',
-      '../assets/conguillio/salon_conguillio.jpeg',
-      '../assets/conguillio/conguillio.mp4',
+      'assets/conguillio/cabana_conguillio.jpeg',
+      'assets/conguillio/cocina_conguillio.jpeg',
+      'assets/conguillio/cocina_entera_conguillio.jpeg',
+      'assets/conguillio/mesas_conguillio.jpeg',
+      'assets/conguillio/mesas2_conguillio.jpeg',
+      'assets/conguillio/pieza1_conguillio.jpeg',
+      'assets/conguillio/pieza2_conguillio.jpeg',
+      'assets/conguillio/pieza3_conguillio.jpeg',
+      'assets/conguillio/sala_completa_conguillio.jpeg',
+      'assets/conguillio/salamandra_conguillio.jpeg',
+      'assets/conguillio/salon_conguillio.jpeg',
+      'assets/conguillio/conguillio.mp4',
     ]
   },
   malleco: {
@@ -261,17 +250,17 @@ const cabanas = {
     titulo: 'Cabaña Malleco',
     desc: '• Un oasis idílico. El cantero de rosas blancas y el cercado de troncos lo convierten en un rincón romántico.\n \n• Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n• Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
     features: ['Tinaja exterior', '2 dormitorios', 'Cocina completa', 'Área Verde completa', 'Pet Friendly'],
-    reglamento: '../assets/NORMAS.pdf',
+    reglamento: 'assets/NORMAS.pdf',
     precio: '$80.000 <span>/ noche</span>',
     imagenes: [
-      '../assets/malleco/cabana_malleco.jpeg',
-      '../assets/malleco/salon_malleco.jpeg',
-      '../assets/malleco/salon2_malleco.jpeg',
-      '../assets/malleco/lavamanos_malleco.jpeg',
-      '../assets/malleco/lavamanos2_malleco.jpeg',
-      '../assets/malleco/pieza1_malleco.jpeg',
-      '../assets/malleco/pieza2_malleco.jpeg',
-      '../assets/malleco/malleco.mp4',
+      'assets/malleco/cabana_malleco.jpeg',
+      'assets/malleco/salon_malleco.jpeg',
+      'assets/malleco/salon2_malleco.jpeg',
+      'assets/malleco/lavamanos_malleco.jpeg',
+      'assets/malleco/lavamanos2_malleco.jpeg',
+      'assets/malleco/pieza1_malleco.jpeg',
+      'assets/malleco/pieza2_malleco.jpeg',
+      'assets/malleco/malleco.mp4',
     ]
   },
   icalma: {
@@ -279,18 +268,18 @@ const cabanas = {
     titulo: 'Cabaña Icalma',
     desc: '• Moderna, rústica y acogedora. Con su fachada de madera oscura y terraza, un refugio perfecto con estilo. \n \n• Disponibilidad de tinajas SIN COSTO ADICIONAL. \n \n• Incluye sabanas, leña, estacionamiento privado y techado. Recinto completamente cerrado, acceso 100% pavimentado. WiFi satelital Starlink ',
     features: ['Tinaja Privada', 'Calefacción', 'Baño con Ducha', 'Habitacion Matrimonial', 'Habitacion 2 camas', 'Pet Friendly'],
-    reglamento: '../assets/NORMAS.pdf',
+    reglamento: 'assets/NORMAS.pdf',
     precio: '$80.000 <span>/ noche</span>',
     imagenes: [
-      '../assets/icalma/cabana_icalma.png',
-      '../assets/icalma/salon1_icalma.jpeg',
-      '../assets/icalma/salon2_icalma.jpeg',
-      '../assets/icalma/ventana_icalma.jpeg',
-      '../assets/icalma/cocina_icalma.jpeg',
-      '../assets/icalma/pieza_icalma.jpeg',
-      '../assets/icalma/baño_icalma.jpeg',
-      '../assets/icalma/presentacionIcalma.mp4',
-      '../assets/icalma/cabana_icalma.mp4',
+      'assets/icalma/cabana_icalma.png',
+      'assets/icalma/salon1_icalma.jpeg',
+      'assets/icalma/salon2_icalma.jpeg',
+      'assets/icalma/ventana_icalma.jpeg',
+      'assets/icalma/cocina_icalma.jpeg',
+      'assets/icalma/pieza_icalma.jpeg',
+      'assets/icalma/baño_icalma.jpeg',
+      'assets/icalma/presentacionIcalma.mp4',
+      'assets/icalma/cabana_icalma.mp4',
     ]
   }
 };
@@ -343,7 +332,6 @@ function actualizarCarrusel(dir) {
     ` : ''}
   `;
 
-  
   if (dir !== undefined) {
     const el = media.querySelector('img, video');
     if (el) {
@@ -351,7 +339,7 @@ function actualizarCarrusel(dir) {
       el.style.transition = 'none';
       el.style.transform = `translateX(${entrada})`;
       el.style.opacity = '0';
-      el.offsetHeight; 
+      el.offsetHeight;
       el.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
       el.style.transform = 'translateX(0)';
       el.style.opacity = '1';
@@ -368,7 +356,6 @@ function moverCarrusel(dir) {
     el.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
     el.style.transform = `translateX(${salida})`;
     el.style.opacity = '0';
-
     setTimeout(() => {
       carruselIndex = (carruselIndex + dir + carruselImagenes.length) % carruselImagenes.length;
       actualizarCarrusel(dir);
@@ -399,8 +386,6 @@ function irASlide(i, dir) {
   }
 }
 
-
-
 function _cerrarModalSinHistorial() {
   document.getElementById('modal-overlay').classList.remove('active');
   document.body.style.overflow = '';
@@ -427,8 +412,6 @@ function _cerrarExitoSinHistorial() {
   document.body.style.overflow = '';
   modalActivo = null;
 }
-
-
 
 function cerrarModal() {
   if (!document.getElementById('modal-overlay').classList.contains('active')) return;
@@ -467,7 +450,7 @@ function enviarReserva() {
   const checkin = document.getElementById('checkin').value;
   const checkout = document.getElementById('checkout').value;
   const cabana = document.getElementById('cabana-select').value;
-  let patente = document.getElementById('patente').value.trim(); 
+  let patente = document.getElementById('patente').value.trim();
   const personas = document.getElementById('resumen-texto').textContent;
   const mensaje = document.getElementById('mensaje').value.trim();
   const mascotas = document.getElementById('mascotas-check').checked
@@ -481,7 +464,7 @@ function enviarReserva() {
     return;
   }
 
-  if(nombre.length<3){
+  if (nombre.length < 3) {
     const err = document.getElementById('form-error');
     err.textContent = 'La cantidad mínima de caracteres del Nombre es de 3.';
     err.style.display = 'block';
@@ -489,7 +472,7 @@ function enviarReserva() {
     return;
   }
 
-  if(patente.length < 8){
+  if (patente.length < 8) {
     const err = document.getElementById('form-error');
     err.textContent = 'La patente debe tener al menos 6 caracteres.';
     err.style.display = 'block';
@@ -497,9 +480,7 @@ function enviarReserva() {
     return;
   }
 
-  if(!patente){
-    patente = 'No indicada';
-  }
+  if (!patente) patente = 'No indicada';
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
@@ -532,8 +513,8 @@ function enviarReserva() {
     { label: 'Email', valor: email },
     { label: 'Teléfono', valor: telefono },
     { label: 'Cabaña', valor: cabana },
-    { label: 'Check-in', valor: checkin },
-    { label: 'Check-out', valor: checkout },
+    { label: 'Check-in', valor: formatearFecha(checkin) },
+    { label: 'Check-out', valor: formatearFecha(checkout) },
     { label: 'Patente', valor: patente },
     { label: 'Personas', valor: personas },
     { label: 'Mascotas', valor: mascotas },
@@ -594,7 +575,7 @@ function confirmarReserva() {
     });
 }
 
-// Mascotas
+// ── MASCOTAS ──
 let numMascotas = 1;
 
 function toggleMascotas() {
