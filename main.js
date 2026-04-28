@@ -598,3 +598,22 @@ function abrirPoliticas() {
   document.body.style.overflow = 'hidden';
   abrirModalHistorial('politicas-overlay');
 }
+
+const actsTrack = document.getElementById('acts-track');
+const actsFill  = document.getElementById('acts-fill');
+
+actsTrack.addEventListener('scroll', () => {
+  const max = actsTrack.scrollWidth - actsTrack.clientWidth;
+  const pct = max > 0 ? (actsTrack.scrollLeft / max) * 80 + 20 : 20;
+  actsFill.style.width = Math.min(100, pct) + '%';
+});
+
+let actsStartX, actsStartScroll, actsDragging = false;
+actsTrack.addEventListener('mousedown', e => {
+  actsDragging = true; actsStartX = e.pageX; actsStartScroll = actsTrack.scrollLeft;
+});
+window.addEventListener('mousemove', e => {
+  if (!actsDragging) return;
+  actsTrack.scrollLeft = actsStartScroll - (e.pageX - actsStartX);
+});
+window.addEventListener('mouseup', () => { actsDragging = false; });
