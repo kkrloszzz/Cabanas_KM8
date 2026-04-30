@@ -1147,6 +1147,13 @@ footer { background: var(--black); color: var(--white); padding: 5rem 6rem 3rem;
   margin-top: 0.6rem;
 }
 
+.info-square-footer{
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
 
 @media (max-width: 900px) {
   
@@ -1156,7 +1163,10 @@ footer { background: var(--black); color: var(--white); padding: 5rem 6rem 3rem;
   }
 
   .acts-card-img {
-    height: 180px;
+    height: 250px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
   }
 
   .acts-card-info {
@@ -1164,12 +1174,12 @@ footer { background: var(--black); color: var(--white); padding: 5rem 6rem 3rem;
   }
 
   .acts-card-info h3 {
-    font-size: 1rem;
+    font-size: 1.25rem;
     margin-bottom: 0.5rem;
   }
 
   .acts-card-info p {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     min-height: unset;  
   }
   
