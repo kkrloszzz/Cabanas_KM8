@@ -600,7 +600,7 @@ footer { background: var(--black); color: var(--white); padding: 5rem 6rem 3rem;
 .modal-reglamento {
   display: inline-flex; align-items: center; gap: 0.5rem;
   font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--gray-dark); text-decoration: none;
+  color: rgb(13, 13, 131); text-decoration: none;
   border-bottom: 1px solid var(--gray-mid); padding-bottom: 2px; margin-top: 1rem;
   transition: color 0.2s, border-color 0.2s;
 }
