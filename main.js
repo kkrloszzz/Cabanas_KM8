@@ -617,3 +617,74 @@ window.addEventListener('mousemove', e => {
   actsTrack.scrollLeft = actsStartScroll - (e.pageX - actsStartX);
 });
 window.addEventListener('mouseup', () => { actsDragging = false; });
+
+// ── NAVBAR SCROLL MÓVIL ──
+(function () {
+  const navbar = document.getElementById('navbar');
+  const mobileMenu = document.getElementById('nav-mobile-menu');
+  const hamburger = document.getElementById('nav-hamburger');
+  let menuOpen = false;
+
+  window.addEventListener('scroll', function () {
+    if (window.innerWidth <= 900) {
+      if (window.scrollY > 60) {
+        navbar.classList.add('scrolled');
+    
+        mobileMenu.style.top = navbar.offsetHeight + 'px';
+      } else {
+        navbar.classList.remove('scrolled');
+        cerrarMenu();
+      }
+    }
+  });
+
+  window.toggleMenu = function () {
+    menuOpen = !menuOpen;
+    hamburger.classList.toggle('open', menuOpen);
+    mobileMenu.classList.toggle('open', menuOpen);
+    mobileMenu.style.top = navbar.offsetHeight + 'px';
+  };
+
+  window.cerrarMenu = function () {
+    menuOpen = false;
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  };
+
+  document.addEventListener('click', function (e) {
+    if (menuOpen && !navbar.contains(e.target) && !mobileMenu.contains(e.target)) {
+      cerrarMenu();
+    }
+  });
+})();
+
+// ── STRIP MARQUEE ──
+(function () {
+  const track = document.getElementById('strip-track');
+  if (!track) return;
+
+  
+  const original = track.innerHTML;
+  track.innerHTML = original + original;
+
+  let position = 0;
+  const speed = 0.5; 
+  const halfWidth = track.scrollWidth / 2;
+  let paused = false;
+
+  track.parentElement.addEventListener('mouseenter', () => paused = true);
+  track.parentElement.addEventListener('mouseleave', () => paused = false);
+
+  function animate() {
+    if (!paused) {
+      position -= speed;
+      if (Math.abs(position) >= halfWidth) {
+        position = 0; 
+      }
+      track.style.transform = `translateX(${position}px)`;
+    }
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+})();
