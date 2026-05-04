@@ -669,7 +669,10 @@ window.addEventListener('mouseup', () => { actsDragging = false; });
 
   let position = 0;
   const speed = 0.5; 
-  const halfWidth = track.scrollWidth / 2;
+  let halfWidth;
+  requestAnimationFrame(() => {
+    halfWidth = track.scrollWidth / 2;
+  });
   let paused = false;
 
   track.parentElement.addEventListener('mouseenter', () => paused = true);

@@ -20,6 +20,7 @@
   
   <ul class="nav-links" id="nav-links-desktop">
     <li><a href="#cabanas">Cabañas</a></li>
+    <li><a href="#actividades">Panoramas</a></li>
     <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#valoraciones">Reseñas</a></li>
     <li><a href="#ubicacion">Ubicación</a></li>
@@ -39,6 +40,7 @@
 <div class="nav-mobile-menu" id="nav-mobile-menu">
   <ul>
     <li><a href="#cabanas" onclick="cerrarMenu()">Cabañas</a></li>
+    <li><a href="#actividades" onclick="cerrarMenu()">Panoramas</a></li>
     <li><a href="#nosotros" onclick="cerrarMenu()">Nosotros</a></li>
     <li><a href="#valoraciones" onclick="cerrarMenu()">Reseñas</a></li>
     <li><a href="#ubicacion" onclick="cerrarMenu()">Ubicación</a></li>
@@ -874,9 +876,7 @@
     <a href="#" onclick="abrirPoliticas(); return false;">políticas de reserva y cancelación </a>
   </label>
 </div>
-<div id="form-error" class="form-error">
-  Por favor completa todos los campos obligatorios antes de continuar!
-</div>
+
 <button class="form-submit" id="btn-enviar" onclick="enviarReserva()" disabled>Enviar Solicitud de Reserva</button>
     </div>
   </div>
@@ -936,7 +936,6 @@
       <div class="modal-features" id="modal-features"></div>
       <div class="modal-footer">
         <div class="modal-price" id="modal-price"></div>
-        <button class="cabana-book" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'}); cerrarModal()">Reservar Ahora</button>
       </div>
     </div>
   </div>
