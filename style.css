@@ -766,19 +766,23 @@ footer { background: var(--black); color: var(--white); padding: 5rem 6rem 3rem;
   .hero-sub { font-size: 1rem; max-width: 100%; }
   .hero-logo { height: 180px; width: 100%; max-width: 280px; }
 
-  .about-imgs {
-    max-height: 320px;
+ .about-imgs {
+    max-height: 400px;
     overflow: hidden;
     width: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    height: 100vh;  
+    margin-bottom: 0.095rem;
   }
 
-  img.about-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+    img.about-img {
+    width: 800%;
+    height: 400px;
+    object-fit: contain;
     object-position: center 100%;
-    display: flex;
-    align-items: center;
+    display: block;
     
   }
 
