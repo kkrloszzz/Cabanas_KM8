@@ -691,3 +691,33 @@ window.addEventListener('mouseup', () => { actsDragging = false; });
 
   requestAnimationFrame(animate);
 })();
+
+function solicitarArriendo(nombreCabana) {
+  // Preseleccionar la cabaña en el select
+  const select = document.getElementById('cabana-select');
+  if (select) {
+    for (let i = 0; i < select.options.length; i++) {
+      if (select.options[i].text === nombreCabana) {
+        select.selectedIndex = i;
+        break;
+      }
+    }
+  }
+  // Cerrar modal si está abierto
+  cerrarModal();
+  // Bajar al formulario
+  document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+}
+
+function solicitarArriendoDesdeModal() {
+  const titulo = document.getElementById('modal-titulo').textContent;
+  const tag = document.getElementById('modal-tag').textContent; 
+  const mapa = {
+    'Cabaña Conguillio': 'Cabaña Conguillio (4–6 personas)',
+    'Cabaña Malleco': 'Cabaña Malleco (1-4 personas)',
+    'Cabaña Icalma': 'Cabaña Icalma (1–4 personas)',
+  };
+  
+  const nombreCabana = mapa[titulo] || '';
+  solicitarArriendo(nombreCabana);
+}
