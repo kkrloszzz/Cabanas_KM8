@@ -761,11 +761,12 @@ function destacarSelect() {
   const select = document.getElementById('cabana-select');
   if (!select) return;
   select.style.transition = 'background 0.3s, border-color 0.3s';
+  select.style.background = '#ff8c00';
   select.style.borderColor = '#ff8c00';
-  select.style.color = '#000000';
+  select.style.color = '#ffffff';
   setTimeout(() => {
     select.style.background = '';
     select.style.borderColor = '';
     select.style.color = '';
-  }, 3000);
+  }, 1500);
 }
