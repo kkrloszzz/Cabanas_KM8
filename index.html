@@ -145,10 +145,15 @@
         <h3 class="cabana-name">Cabaña Conguillio</h3>
         <p class="cabana-desc">Nuestra cabaña más grande. Perfecta para familias y grupos de amigos que desean tener grandes y memorables experiencias en un lugar natural y acogedor.</p>
         <div class="cabana-footer">
-          <a class="modal-reglamento" id="modal-reglamento" href="../assets/NORMAS.pdf" target="_blank">
+          <a class="modal-reglamento" href="../assets/NORMAS.pdf" target="_blank">
             Lee aquí reglamento de la cabaña
           </a>
-          <div class="cabana-price">$100.000 <span>/ noche</span></div>
+          <div class="cabana-footer-bottom">
+            <div class="cabana-price">$100.000 <span>/ noche</span></div>            
+          </div>
+          <div class="cabana-footer-bottom">
+            <button class="btn-solicitar-arriendo" onclick="event.stopPropagation(); solicitarArriendo('Cabaña Conguillio (4–6 personas)')">Solicitar Arriendo</button>
+          </div>
         </div>
       </div>
     </div>
@@ -164,8 +169,13 @@
         <div class="cabana-footer">
           <a class="modal-reglamento" id="modal-reglamento" href="../assets/NORMAS.pdf" target="_blank">
             Lee aquí reglamento de la cabaña 
-          </a>
-          <div class="cabana-price">$80.000 <span>/ noche</span></div>
+          </a>         
+          <div class="cabana-footer-bottom">
+            <div class="cabana-price">$80.000 <span>/ noche</span></div>
+          </div>
+          <div class="cabana-footer-bottom">
+            <button class="btn-solicitar-arriendo" onclick="event.stopPropagation(); solicitarArriendo('Cabaña Malleco (1-4 personas)')">Solicitar Arriendo</button>
+          </div>
         </div>
       </div>
     </div>
@@ -179,10 +189,15 @@
         <h3 class="cabana-name">Cabaña Icalma</h3>
         <p class="cabana-desc">Disfrutar es felicidad. Con una tinaja privada que permite relajranos ante el clima natural del sur y olvidarnos de nuestras preocupaciones con familiares y amigos.</p>
         <div class="cabana-footer">
-            <a class="modal-reglamento" id="modal-reglamento" href="../assets/NORMAS.pdf" target="_blank">
-              Lee aquí reglamento de la cabaña 
-            </a>
-          <div class="cabana-price">$80.000 <span>/ noche</span></div>
+          <a class="modal-reglamento" id="modal-reglamento" href="../assets/NORMAS.pdf" target="_blank">
+            Lee aquí reglamento de la cabaña 
+          </a>         
+          <div class="cabana-footer-bottom">
+            <div class="cabana-price">$80.000 <span>/ noche</span></div>
+          </div>
+          <div class="cabana-footer-bottom">
+            <button class="btn-solicitar-arriendo" onclick="event.stopPropagation(); solicitarArriendo('Cabaña Icalma (1–4 personas)')">Solicitar Arriendo</button>
+          </div>
         </div>
       </div>
     </div>
@@ -935,7 +950,13 @@
       <p class="modal-desc" id="modal-desc"></p>
       <div class="modal-features" id="modal-features"></div>
       <div class="modal-footer">
+        <a class="modal-reglamento" id="modal-reglamento" href="../assets/NORMAS.pdf" target="_blank">
+          Lee aquí reglamento de la cabaña
+        </a>
         <div class="modal-price" id="modal-price"></div>
+        <button class="btn-solicitar-arriendo" onclick="solicitarArriendoDesdeModal()">
+          Solicitar Arriendo
+        </button>
       </div>
     </div>
   </div>

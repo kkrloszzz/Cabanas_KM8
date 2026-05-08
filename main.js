@@ -691,3 +691,82 @@ window.addEventListener('mouseup', () => { actsDragging = false; });
 
   requestAnimationFrame(animate);
 })();
+
+function solicitarArriendo(nombreCabana) {
+  // Preseleccionar la cabaña en el select
+  const select = document.getElementById('cabana-select');
+  if (select) {
+    for (let i = 0; i < select.options.length; i++) {
+      if (select.options[i].text === nombreCabana) {
+        select.selectedIndex = i;
+        break;
+      }
+    }
+  }
+  // Cerrar modal si está abierto
+  cerrarModal();
+  // Bajar al formulario
+  document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+}
+
+function solicitarArriendo(nombreCabana) {
+  const select = document.getElementById('cabana-select');
+  if (select && nombreCabana) {
+    for (let i = 0; i < select.options.length; i++) {
+      if (select.options[i].text === nombreCabana) {
+        select.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  cerrarModal();
+
+  setTimeout(() => {
+    document.getElementById('cabana-select').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => destacarSelect(), 600);
+  }, 100);
+}
+
+function solicitarArriendoDesdeModal() {
+  const titulo = document.getElementById('modal-titulo').textContent;
+
+  const mapa = {
+    'Cabaña Conguillio': 'Cabaña Conguillio (4–6 personas)',
+    'Cabaña Malleco': 'Cabaña Malleco (1-4 personas)',
+    'Cabaña Icalma': 'Cabaña Icalma (1–4 personas)',
+  };
+
+  const nombreCabana = mapa[titulo] || '';
+
+  const select = document.getElementById('cabana-select');
+  if (select && nombreCabana) {
+    for (let i = 0; i < select.options.length; i++) {
+      if (select.options[i].text === nombreCabana) {
+        select.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  _cerrarModalSinHistorial();
+
+  setTimeout(() => {
+    document.getElementById('cabana-select').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => destacarSelect(), 600);
+  }, 100);
+}
+
+function destacarSelect() {
+  const select = document.getElementById('cabana-select');
+  if (!select) return;
+  select.style.transition = 'background 0.3s, border-color 0.3s';
+  select.style.background = '#ff8c00';
+  select.style.borderColor = '#ff8c00';
+  select.style.color = '#ffffff';
+  setTimeout(() => {
+    select.style.background = '';
+    select.style.borderColor = '';
+    select.style.color = '';
+  }, 1500);
+}
