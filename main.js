@@ -709,15 +709,63 @@ function solicitarArriendo(nombreCabana) {
   document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
 }
 
+function solicitarArriendo(nombreCabana) {
+  const select = document.getElementById('cabana-select');
+  if (select && nombreCabana) {
+    for (let i = 0; i < select.options.length; i++) {
+      if (select.options[i].text === nombreCabana) {
+        select.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  cerrarModal();
+
+  setTimeout(() => {
+    document.getElementById('cabana-select').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => destacarSelect(), 600);
+  }, 100);
+}
+
 function solicitarArriendoDesdeModal() {
   const titulo = document.getElementById('modal-titulo').textContent;
-  const tag = document.getElementById('modal-tag').textContent; 
+
   const mapa = {
     'Cabaña Conguillio': 'Cabaña Conguillio (4–6 personas)',
     'Cabaña Malleco': 'Cabaña Malleco (1-4 personas)',
     'Cabaña Icalma': 'Cabaña Icalma (1–4 personas)',
   };
-  
+
   const nombreCabana = mapa[titulo] || '';
-  solicitarArriendo(nombreCabana);
+
+  const select = document.getElementById('cabana-select');
+  if (select && nombreCabana) {
+    for (let i = 0; i < select.options.length; i++) {
+      if (select.options[i].text === nombreCabana) {
+        select.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  _cerrarModalSinHistorial();
+
+  setTimeout(() => {
+    document.getElementById('cabana-select').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => destacarSelect(), 600);
+  }, 100);
+}
+
+function destacarSelect() {
+  const select = document.getElementById('cabana-select');
+  if (!select) return;
+  select.style.transition = 'background 0.3s, border-color 0.3s';
+  select.style.borderColor = '#ff8c00';
+  select.style.color = '#000000';
+  setTimeout(() => {
+    select.style.background = '';
+    select.style.borderColor = '';
+    select.style.color = '';
+  }, 3000);
 }
