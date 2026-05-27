@@ -255,8 +255,12 @@ nav {
 .cabanas { background: var(--gray-light); }
 .cabanas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--gray-mid); }
 .cabana-card {
-  background: var(--white); overflow: hidden;
-  transition: transform 0.3s; cursor: pointer;
+  background: var(--white);
+  overflow: hidden;
+  transition: transform 0.3s;
+  cursor: pointer;
+  display: flex;         
+  flex-direction: column; 
 }
 .cabana-card:hover { transform: translateY(-4px); }
 .cabana-img {
@@ -270,7 +274,12 @@ nav {
   width: 100%; height: 100%;
   object-fit: cover; display: block; z-index: 1;
 }
-.cabana-info { padding: 1.5rem; }
+.cabana-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 .cabana-tag {
   font-size: 0.55rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
   color: #000000; margin-bottom: 0.5rem;
@@ -279,7 +288,7 @@ nav {
   font-family: 'Playfair Display', serif;
   font-size: 1.3rem; font-weight: 700; color: var(--black); margin-bottom: 0.5rem;
 }
-.cabana-desc { font-size: 0.8rem; color: var(--gray-dark); line-height: 1.6; margin-bottom: 1.2rem; }
+.cabana-desc { font-size: 0.8rem; color: var(--gray-dark); line-height: 1.6; margin-bottom: 1.2rem; flex: 1; }
 
 /* Footer de cada card: reglamento arriba, precio+botón abajo */
 .cabana-footer {
@@ -819,16 +828,31 @@ footer { background: var(--black); color: var(--white); padding: 5rem 6rem 3rem;
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  opacity: 0;
+  animation: promoFadeIn 0s ease 0.5s forwards;
 }
+
+@keyframes promoFadeIn {
+  to { opacity: 1; }
+} 
 
 .promo-modal {
   background: #fff;
   border-radius: 14px;
   width: 100%;
-  height: 600px;
   max-width: 1000px;
-  overflow: hidden;
+  overflow-y: auto;        
   position: relative;
+  opacity: 0;
+  pointer-events: all;     
+  animation: promoSlideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+}
+
+@keyframes promoSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .promo-close-btn {
@@ -1005,6 +1029,49 @@ footer { background: var(--black); color: var(--white); padding: 5rem 6rem 3rem;
     flex: 0 0 75vw; min-height: unset;
     aspect-ratio: 4 / 3; scroll-snap-align: center; border-radius: 6px;
   }
+
+  /* Pop up móvil */
+  .promo-modal {
+    max-width: 92vw;
+    border-radius: 10px;
+  }
+
+  .promo-image {
+    height: 200px;
+  }
+
+  .promo-title {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .promo-description {
+    font-size: 13px;
+    margin-bottom: 0.7rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .promo-price {
+    font-size: 20px;
+  }
+
+  .promo-price-wrapper {
+    margin-bottom: 0.9rem;
+  }
+
+  .promo-actions {
+    flex-direction: column;
+  }
+
+  .promo-btn-primary,
+  .promo-btn-secondary {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  } 
 
   /* Modal cabañas */
   .modal-cabana { grid-template-columns: 1fr; }

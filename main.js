@@ -770,3 +770,9 @@ function destacarSelect() {
     select.style.color = '';
   }, 1500);
 }
+
+document.getElementById('promo-overlay').addEventListener('click', function(e) {
+  if (e.target === this) {
+    this.style.display = 'none';
+  }
+});
