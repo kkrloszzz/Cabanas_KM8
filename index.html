@@ -213,7 +213,7 @@
 <section class="section actividades" id="actividades">
   <p class="section-label">Actividades</p>
   <h2 class="section-title" style="margin-bottom: 3rem;"><em>Los mejores </em>Panoramas</h2>
-
+  <p class="section-label">DESLIZA PARA VER LOS PANORMAS</p>
   <div class="acts-scroll-outer">
     <div class="acts-scroll-track" id="acts-track">
 
@@ -624,7 +624,6 @@
   </div>
 
   <div class="acts-progress-bar"><div class="acts-progress-fill" id="acts-fill"></div></div>
-  <p class="acts-swipe-hint">desliza para ver más</p>
 
 </section>
 
@@ -885,7 +884,8 @@
       </div>
       <div class="form-group">
         <label>Mensaje (opcional)</label>
-        <textarea id="mensaje" placeholder="Cuéntanos algo más sobre tu visita..."></textarea>
+        <textarea id="mensaje" maxlength="500" placeholder="Cuéntanos algo más sobre tu visita..."></textarea>
+        <span class="mensaje-contador" id="mensaje-contador">500 caracteres restantes</span>
       </div>
       <div id="form-error" class="form-error">
         Por favor completa todos los campos obligatorios antes de continuar!

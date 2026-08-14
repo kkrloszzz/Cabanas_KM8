@@ -500,6 +500,13 @@ function enviarReserva() {
     return;
   }
 
+  if (mensaje.length > 500) {
+    const err = document.getElementById('form-error');
+    err.textContent = 'El mensaje no puede superar los 500 caracteres.';
+    err.style.display = 'block';
+    err.scrollIntoView({ behavior: 'smooth', block: 'center'});
+    return;
+  }
   const telefonoRegex = /^\+?[0-9]{11,12}$/;
   if (!telefonoRegex.test(telefono.replace(/\s/g, ''))) {
     const err = document.getElementById('form-error');
@@ -784,4 +791,15 @@ document.getElementById('promo-overlay').addEventListener('click', function(e) {
   if (e.target === this) {
     this.style.display = 'none';
   }
+});
+
+// Contador de caracteres del mensaje
+const mensajeInput = document.getElementById('mensaje');
+const mensajeContador = document.getElementById('mensaje-contador');
+const MENSAJE_MAX = 500;
+
+mensajeInput.addEventListener('input', function() {
+  const restantes = MENSAJE_MAX - this.value.length;
+  mensajeContador.textContent = restantes + ' caracteres restantes';
+  mensajeContador.classList.toggle('limite', restantes <= 20);
 });

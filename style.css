@@ -474,6 +474,17 @@ nav {
   font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--black);
   outline: none; transition: border-color 0.2s;
 }
+.mensaje-contador {
+  display: block;
+  font-size: 0.7rem;
+  color: #000000;
+  text-align: right;
+  margin-top: 0.3rem;
+}
+.mensaje-contador.limite {
+  color: #c0392b;
+}
+
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--black); }
 .form-group textarea { height: 100px; resize: vertical; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
