@@ -11,6 +11,7 @@
 <link rel="icon" type="image/png" href="assets/LOGO_CABAÑAS_512.png" size="192x192">
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- Navbar -->
@@ -63,7 +64,10 @@
   </div>
   <div class="hero-right">
   <div class="hero-slider" id="hero-slider">
-    <img src="../assets/cabanas.png" alt="cabañas" class="hero-slide active">
+    <video autoplay muted loop playsinline class="hero-slide active">
+      <source src="../assets/invierno2026km8.mp4" type="video/mp4">
+    </video>
+    <img src="../assets/tinajaInvieno.jpg" alt="cabañas" class="hero-slide">
     <img src="../assets/cabana1.jpg" alt="cabaña 1" class="hero-slide">
     <img src="../assets/interior.jpg" alt="interior" class="hero-slide">
     <img src="../assets/tinaja.jpeg" alt="tinaja" class="hero-slide">
@@ -152,7 +156,7 @@
             <div class="cabana-price">$100.000 <span>/ noche</span></div>            
           </div>
           <div class="cabana-footer-bottom">
-            <button class="btn-solicitar-arriendo" onclick="event.stopPropagation(); solicitarArriendo('Cabaña Conguillio (4–6 personas)')">Solicitar Arriendo</button>
+            <button class="btn-solicitar-arriendo" onclick="event.stopPropagation(); solicitarArriendo('Cabaña Conguillio (4–6 personas)')">Solicitar Reserva</button>
           </div>
         </div>
       </div>
@@ -174,7 +178,7 @@
             <div class="cabana-price">$80.000 <span>/ noche</span></div>
           </div>
           <div class="cabana-footer-bottom">
-            <button class="btn-solicitar-arriendo" onclick="event.stopPropagation(); solicitarArriendo('Cabaña Malleco (1-4 personas)')">Solicitar Arriendo</button>
+            <button class="btn-solicitar-arriendo" onclick="event.stopPropagation(); solicitarArriendo('Cabaña Malleco (1-4 personas)')">Solicitar Reserva</button>
           </div>
         </div>
       </div>
@@ -196,7 +200,7 @@
             <div class="cabana-price">$80.000 <span>/ noche</span></div>
           </div>
           <div class="cabana-footer-bottom">
-            <button class="btn-solicitar-arriendo" onclick="event.stopPropagation(); solicitarArriendo('Cabaña Icalma (1–4 personas)')">Solicitar Arriendo</button>
+            <button class="btn-solicitar-arriendo" onclick="event.stopPropagation(); solicitarArriendo('Cabaña Icalma (1–4 personas)')">Solicitar Reserva</button>
           </div>
         </div>
       </div>
@@ -209,7 +213,7 @@
 <section class="section actividades" id="actividades">
   <p class="section-label">Actividades</p>
   <h2 class="section-title" style="margin-bottom: 3rem;"><em>Los mejores </em>Panoramas</h2>
-
+  <p class="section-label">DESLIZA PARA VER LOS PANORMAS</p>
   <div class="acts-scroll-outer">
     <div class="acts-scroll-track" id="acts-track">
 
@@ -218,7 +222,7 @@
           <img src="assets/lagoConguillio.jpg" alt="Lago Conguillio">
         </div>
         <div class="acts-card-info">
-          <h3>Lago Conguillio</h3>
+          <h3>Parque Nacional Conguillio</h3>
           <p>Cuerpo de agua volcánico rodeado de araucarias milenarias y custodiado por el volcán Llaima. Su mayor atractivo es el paisaje prehistórico que ofrece, ideal para navegar o caminar por sus orillas de lava.</p>
         </div>
          <div class="acts-card-info">
@@ -231,7 +235,7 @@
                 <img src="assets/auto.jpg" alt="auto"> En Auto
               </div>
               <div class="info-square-header">
-                <img src="assets/timeTravel.jpg" alt="tiempo"> <span>1 h 23 min</span>
+                <img src="assets/timeTravel.jpg" alt="tiempo"> <span>45 min</span>
               </div>
               <div class="info-square-row">
                 <img src="assets/distancia.png" alt="distancia"> <span>50.2 Km</span>
@@ -620,7 +624,6 @@
   </div>
 
   <div class="acts-progress-bar"><div class="acts-progress-fill" id="acts-fill"></div></div>
-  <p class="acts-swipe-hint">desliza para ver más</p>
 
 </section>
 
@@ -881,7 +884,8 @@
       </div>
       <div class="form-group">
         <label>Mensaje (opcional)</label>
-        <textarea id="mensaje" placeholder="Cuéntanos algo más sobre tu visita..."></textarea>
+        <textarea id="mensaje" maxlength="500" placeholder="Cuéntanos algo más sobre tu visita..."></textarea>
+        <span class="mensaje-contador" id="mensaje-contador">500 caracteres restantes</span>
       </div>
       <div id="form-error" class="form-error">
         Por favor completa todos los campos obligatorios antes de continuar!
@@ -1014,6 +1018,43 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>emailjs.init('DNVmVspdF-wAkJdBT');</script>
+
+<div id="promo-overlay" class="promo-overlay">
+  <div class="promo-modal">
+    <button class="promo-close-btn" onclick="document.getElementById('promo-overlay').style.display='none'">
+      ✕
+    </button>
+    <img src="../assets/tinajaInvieno.jpg" alt="Promoción cabañas KM8" class="promo-image">
+    
+    <div class="promo-content">
+      <span class="promo-badge">
+        YA ESTAMOS RESERVANDO
+      </span>
+      <p class="promo-title">¡APROVECHA TUS VACACIONES DE INVIERNO!</p>
+      <p class="promo-description">
+        Reserva tu estadía en nuestras acogedoras cabañas y disfruta de la magia del invierno en Curacautín. Un refugio perfecto para crear recuerdos inolvidables con tus seres queridos.
+      </p>
+      <p class="promo-description">
+        !Te esperamos!
+      </p>
+      
+      <div class="promo-price-wrapper">
+        <span class="promo-price">Desde $80.000</span>
+        <span class="promo-period">/ noche</span>
+      </div>
+      
+      <div class="promo-actions">
+        <a href="#cabanas" class="promo-btn-primary" onclick="document.getElementById('promo-overlay').style.display='none'">
+          Ver cabañas
+        </a>
+        <button class="promo-btn-secondary" onclick="document.getElementById('promo-overlay').style.display='none'">
+          Ahora no
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="main.js"></script>
 </body>
 </html>

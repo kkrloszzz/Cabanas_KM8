@@ -255,8 +255,12 @@ nav {
 .cabanas { background: var(--gray-light); }
 .cabanas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--gray-mid); }
 .cabana-card {
-  background: var(--white); overflow: hidden;
-  transition: transform 0.3s; cursor: pointer;
+  background: var(--white);
+  overflow: hidden;
+  transition: transform 0.3s;
+  cursor: pointer;
+  display: flex;         
+  flex-direction: column; 
 }
 .cabana-card:hover { transform: translateY(-4px); }
 .cabana-img {
@@ -270,7 +274,12 @@ nav {
   width: 100%; height: 100%;
   object-fit: cover; display: block; z-index: 1;
 }
-.cabana-info { padding: 1.5rem; }
+.cabana-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 .cabana-tag {
   font-size: 0.55rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
   color: #000000; margin-bottom: 0.5rem;
@@ -279,7 +288,7 @@ nav {
   font-family: 'Playfair Display', serif;
   font-size: 1.3rem; font-weight: 700; color: var(--black); margin-bottom: 0.5rem;
 }
-.cabana-desc { font-size: 0.8rem; color: var(--gray-dark); line-height: 1.6; margin-bottom: 1.2rem; }
+.cabana-desc { font-size: 0.8rem; color: var(--gray-dark); line-height: 1.6; margin-bottom: 1.2rem; flex: 1; }
 
 /* Footer de cada card: reglamento arriba, precio+botón abajo */
 .cabana-footer {
@@ -465,6 +474,17 @@ nav {
   font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--black);
   outline: none; transition: border-color 0.2s;
 }
+.mensaje-contador {
+  display: block;
+  font-size: 0.7rem;
+  color: #000000;
+  text-align: right;
+  margin-top: 0.3rem;
+}
+.mensaje-contador.limite {
+  color: #c0392b;
+}
+
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--black); }
 .form-group textarea { height: 100px; resize: vertical; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -810,6 +830,139 @@ footer { background: var(--black); color: var(--white); padding: 5rem 6rem 3rem;
 .fade-in:nth-child(3) { animation-delay: 0.4s; }
 .fade-in:nth-child(4) { animation-delay: 0.55s; }
 
+/* ── POP UP INICIAL ── */
+.promo-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  animation: promoFadeIn 0s ease 0.5s forwards;
+}
+
+@keyframes promoFadeIn {
+  to { opacity: 1; }
+} 
+
+.promo-modal {
+  background: #fff;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 800px;
+  overflow-y: auto;        
+  position: relative;
+  opacity: 0;
+  pointer-events: all;     
+  animation: promoSlideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
+}
+
+@keyframes promoSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.promo-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.promo-image {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+}
+
+.promo-content {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.promo-badge {
+  background: #e3f0fc;
+  color: #0059ff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.promo-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+}
+
+.promo-description {
+  margin: 0 0 1rem;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.promo-price-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+
+.promo-price {
+  font-size: 26px;
+  font-weight: 700;
+  color: #687181;
+}
+
+.promo-period {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.promo-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.promo-btn-primary {
+  flex: 1;
+  padding: 10px;
+  background: #000000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+
+.promo-btn-secondary {
+  padding: 10px 14px;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+}
+
 /* ── RESPONSIVE TABLET / MÓVIL (max 900px) ── */
 @media (max-width: 900px) {
 
@@ -887,6 +1040,60 @@ footer { background: var(--black); color: var(--white); padding: 5rem 6rem 3rem;
     flex: 0 0 75vw; min-height: unset;
     aspect-ratio: 4 / 3; scroll-snap-align: center; border-radius: 6px;
   }
+
+  /* Pop up móvil */
+  .promo-modal {
+    max-width: 92vw;
+    border-radius: 10px;
+  }
+
+  .promo-image {
+    height: 220px;
+  }
+
+  .promo-title {
+    font-size: 16px;
+    margin-bottom: 6px;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  .promo-description {
+    font-size: 13px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 100px;
+    text-align: center;
+  }
+
+  .promo-price {
+    margin-top: 0.5rem;
+    font-size: 20px;
+  }
+
+  
+  .promo-content {
+    text-align: center;
+  }
+
+  .promo-price-wrapper {
+    margin-bottom: 0.9rem;
+  }
+
+  .promo-actions {
+    flex-direction: column;
+  }
+
+  .promo-btn-primary,
+  .promo-btn-secondary {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  } 
 
   /* Modal cabañas */
   .modal-cabana { grid-template-columns: 1fr; }

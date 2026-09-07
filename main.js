@@ -168,12 +168,21 @@ document.addEventListener('DOMContentLoaded', function() {
   // Slider hero
   const heroSlides = document.querySelectorAll('.hero-slide');
   let heroIndex = 0;
+
+  function nextHeroSlide() {
+    if (heroSlides.length === 0) return;
+    heroSlides[heroIndex].classList.remove('active');
+    heroIndex = (heroIndex + 1) % heroSlides.length;
+    heroSlides[heroIndex].classList.add('active');
+
+    // El video (slide 0) dura más tiempo en pantalla que las fotos
+    const duracion = heroIndex === 0 ? 9000 : 3000;
+    setTimeout(nextHeroSlide, duracion);
+  }
+
   if (heroSlides.length > 0) {
-    setInterval(function() {
-      heroSlides[heroIndex].classList.remove('active');
-      heroIndex = (heroIndex + 1) % heroSlides.length;
-      heroSlides[heroIndex].classList.add('active');
-    }, 3000);
+    // Arranca el ciclo: el primer slide (video) dura su tiempo extendido
+    setTimeout(nextHeroSlide, 9000);
   }
 
   // Swipe en modal
@@ -230,7 +239,7 @@ const cabanas = {
     features: ['Tinaja privada', 'Calefacción', 'Cocina equipada', 'Sala de estar amplia', 'Pet Friendly'],
     reglamento: 'assets/NORMAS.pdf',
     precio: '$100.000 <span>/ noche</span>',
-    imagenes: [
+    imagenes: [ 
       'assets/conguillio/cabana_conguillio.jpeg',
       'assets/conguillio/cocina_conguillio.jpeg',
       'assets/conguillio/cocina_entera_conguillio.jpeg',
@@ -491,6 +500,13 @@ function enviarReserva() {
     return;
   }
 
+  if (mensaje.length > 500) {
+    const err = document.getElementById('form-error');
+    err.textContent = 'El mensaje no puede superar los 500 caracteres.';
+    err.style.display = 'block';
+    err.scrollIntoView({ behavior: 'smooth', block: 'center'});
+    return;
+  }
   const telefonoRegex = /^\+?[0-9]{11,12}$/;
   if (!telefonoRegex.test(telefono.replace(/\s/g, ''))) {
     const err = document.getElementById('form-error');
@@ -770,3 +786,20 @@ function destacarSelect() {
     select.style.color = '';
   }, 1500);
 }
+
+document.getElementById('promo-overlay').addEventListener('click', function(e) {
+  if (e.target === this) {
+    this.style.display = 'none';
+  }
+});
+
+// Contador de caracteres del mensaje
+const mensajeInput = document.getElementById('mensaje');
+const mensajeContador = document.getElementById('mensaje-contador');
+const MENSAJE_MAX = 500;
+
+mensajeInput.addEventListener('input', function() {
+  const restantes = MENSAJE_MAX - this.value.length;
+  mensajeContador.textContent = restantes + ' caracteres restantes';
+  mensajeContador.classList.toggle('limite', restantes <= 20);
+});
