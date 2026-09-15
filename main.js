@@ -175,14 +175,14 @@ document.addEventListener('DOMContentLoaded', function() {
     heroIndex = (heroIndex + 1) % heroSlides.length;
     heroSlides[heroIndex].classList.add('active');
 
-    // El video (slide 0) dura más tiempo en pantalla que las fotos
+  
     const duracion = heroIndex === 0 ? 9000 : 3000;
     setTimeout(nextHeroSlide, duracion);
   }
 
   if (heroSlides.length > 0) {
-    // Arranca el ciclo: el primer slide (video) dura su tiempo extendido
-    setTimeout(nextHeroSlide, 9000);
+    heroSlides[0].classList.add('active');
+    setTimeout(nextHeroSlide, 3000);
   }
 
   // Swipe en modal
